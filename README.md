@@ -38,20 +38,27 @@ npm test
 ```bash
 # 使用styule， 函数rem，进行换算，直接使用设计稿尺寸，
 eg: 长100px， width: rem(100)
+
 # 页面转场模拟app切换：交互动效
 基本实现，页面回退，首次访问页面交互动效
+
 ```
 
 ## 主要使用技术
 ```bash
 # vue-navigation
 模拟历史记录，缓存页面
+
 # vue-router
 路由跳转
+
 # superagent
 接口请求
+
 # vuex
 数据状态管理
+
 # lodash
 常用工具库
+
 ```
