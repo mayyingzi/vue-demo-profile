@@ -1,5 +1,9 @@
 <template lang="html">
-    <div id="app">        
+    <div id="app">    
+        <!-- header -->
+        <vue-header>
+            <span slot="title">测试标题</span>
+        </vue-header>
         <!-- <router-view></router-view> -->
         <div class="main-box" :class="transitionClass">
             <transition 
@@ -20,6 +24,9 @@
 
     export default {
         name: 'vue-demo',
+        components: {
+            VueHeader: require('@/components/header')
+        },
         data() {
             return {
                 view: true,
@@ -28,7 +35,6 @@
                 transitionMode: 'in-out'
             };
         },
-        components: {},
         computed: {},
         beforeCreate() {
             this.$navigation.on('back', () => {
