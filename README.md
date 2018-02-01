@@ -15,16 +15,16 @@ npm install
 # 使用内测环境数据进行开发
 npm run dev
 
-# 使用其它环境数据进行开发, env 为 beta, abtest or release
+# 使用其它环境数据进行开发, env 为 beta(内测),beta(公测), abtest(灰度，预上线) or release(正式)
 npm run dev:<env>
 
 # 打包到内测
 npm run build
 
-# 打包到不同环境, env 为 beta, abtest or release
+# 打包到不同环境,  env 为 beta(内测),beta(公测), abtest(灰度，预上线) or release(正式)
 npm run build:<env>
 
-# 打包并查看打包分析 build后面加env 一样可以打包到不同环境
+# 打包并查看打包分析 build后面加env 一样可以打包到不同环境，report查看项目打包文件大小分布图
 npm run build --report
 
 # 运行单元测试
@@ -44,4 +44,6 @@ eg: 长100px， width: rem(100)
 ```bash
 # vue-navigation
 模拟历史记录，缓存页面
+# vue-router
+路由跳转
 ```
