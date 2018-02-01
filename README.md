@@ -42,6 +42,4 @@ eg: 长100px， width: rem(100)
 
 ## 主要引用插件
 ```bash
-# vue-navigation
-模拟历史记录，缓存页面
 ```
