@@ -1,6 +1,5 @@
 import { mapGetters, mapActions } from 'vuex';
 import Vue from 'vue';
-import axios from 'axios';
 
 export default {
     name: 'loginView',
@@ -41,6 +40,17 @@ export default {
                 openId: '12356'
             });
         },
+        async testPutM(){
+            const res = await Vue.$ajax.put('testPutMethod', {
+                id: '测试PUT'
+            })
+        },
+        async testPostM(){
+            const res = await Vue.$ajax.post('testPostMethod', {
+                id: '测试post'
+            })
+        },
+        
         async testClickA() {
             try {
                 const res = await this.fetchLogin();

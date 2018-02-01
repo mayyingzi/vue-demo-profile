@@ -5,6 +5,8 @@
             进入第三层页面，处理缓存机制
         </div>
         <div class="demo-ajax" @click ="testClickA">测试接口数据请求</div>
+        <div class="demo-ajax" @click ="testPutM">测试put接口</div>
+        <div class="demo-ajax" @click ="testPostM">测试post接口</div>
     </div>
 </template>
 <script src='./login.js' lang='babel'></script>

@@ -43,7 +43,8 @@ const ajaxRequest = (httpMethod) => async (apiName, params = {}) => {
 
 const $ajax = {
     get: ajaxRequest('get'),
-    post: ajaxRequest('post')
+    post: ajaxRequest('post'),
+    put: ajaxRequest('put')
 };
 
 export default $ajax;

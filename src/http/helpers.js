@@ -1,8 +1,5 @@
 import request from 'superagent/lib/client';
-import {
-    API_VERSION,
-    API_HOST, API_ENV, ENV
-} from '@/constants';
+import { API_VERSION, API_HOST, API_ENV, ENV } from '@/constants';
 import store from '@/store';
 import apiMapping from '@/api/apiMapping';
 
@@ -30,14 +27,15 @@ const resolveApi = (apiName) => {
 
 export const configParams = (reqParams) => {
     const params = {};
-    const token = (ENV === 'testing' || API_ENV !== 'release')
-                ? Math.ceil(Math.random() * 100000).toString()
-                : store.state.auth.token;
+    const token =
+        ENV === 'testing' || API_ENV !== 'release'
+            ? Math.ceil(Math.random() * 100000).toString()
+            : store.state.auth.token;
 
     // 加入共同参数
     Object.assign(params, reqParams, {
         api_version: API_VERSION,
-        token,
+        token
     });
 
     return params;
@@ -47,10 +45,9 @@ export const configAjax = (options) => {
     const { httpMethod, apiName, reqParams } = options;
     const ajaxTimeout = 20000;
     // const ajaxTimeout = 200; // 测试timeout用的时间限制
-
     const ajax = request[httpMethod](resolveApi(apiName))
-                .timeout(ajaxTimeout)
-                .accept('application/json');
+        .timeout(ajaxTimeout)
+        .accept('application/json');
 
     if (httpMethod === 'get') {
         ajax.query(reqParams);
