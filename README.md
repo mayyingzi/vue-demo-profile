@@ -37,5 +37,5 @@ npm test
 ## 样式设置
 ```bash
 # 使用styule， 函数rem，进行换算，直接使用设计稿尺寸，
-eg: 长100px， width: rem(100)
+-eg: 长100px， width: rem(100)
 ```
