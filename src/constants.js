@@ -11,12 +11,12 @@ export const API_HOST = {
         api_host: '//easy-mock.com/mock/5a45f0ce71ce891c4ab97afc/test'
     },
     beta: {
-        api_host: '//easy-beta.com/mock/5a45f0ce71ce891c4ab97afc/test'
+        api_host: '//easy-mock.com/mock/5a45f0ce71ce891c4ab97afc/test'
     },
     abtest: {
-        api_host: '//easy-abtest.com/mock/5a45f0ce71ce891c4ab97afc/test'
+        api_host: '//easy-mock.com/mock/5a45f0ce71ce891c4ab97afc/test'
     },
     release: {
-        api_host: '//easy-release.com/mock/5a45f0ce71ce891c4ab97afc/test'
+        api_host: '//easy-mock.com/mock/5a45f0ce71ce891c4ab97afc/test'
     },
 };
