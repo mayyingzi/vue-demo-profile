@@ -1,0 +1,12 @@
+<template lang="html">
+    <div class="loginView">
+        登录页面
+        <div class="go-third" @click="goThird">
+            进入第三层页面，处理缓存机制
+        </div>
+        <div class="demo-ajax" @click ="testClickA">测试接口数据请求</div>
+    </div>
+</template>
+<script src='./login.js' lang='babel'></script>
+<style src='./login.styl' lang='stylus' scoped></style>
+
