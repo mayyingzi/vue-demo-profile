@@ -6,6 +6,10 @@ global-reset()
 html, body
     height 100%
     color $fcBlack
+// ios 点击高亮遮罩去掉
+a,img,button,input,textarea,label,div,section,span,p
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
 body
     font-size rem($fontBase)
 #app
@@ -107,3 +111,16 @@ body
 
 .contentMain
     z-index 0
+
+// header
+.header
+    flex 0 0 auto
+    .back-btn
+        display block
+        width rem(80)
+        height rem(80)
+        arrowGreyLeft(0.2,0.2)
+        &:after
+            border-color #fff
+            top 40%
+            left -39%

@@ -1,8 +1,15 @@
 <template lang="html">
     <div id="app">    
         <!-- header -->
-        <vue-header>
-            <span slot="title">测试标题</span>
+        <vue-header :class="headerClass">
+            <!-- left -->
+            <span slot="left"><component
+                v-bind:is="headerLeftBtn"
+            ></component></span>
+            <span slot="title">{{title}}</span>
+            <!-- right -->
+            <span slot="right"><component
+                v-bind:is="headerRightBtn" ></component></span>
         </vue-header>
         <!-- <router-view></router-view> -->
         <div class="main-box" :class="transitionClass">
@@ -10,7 +17,9 @@
                 :mode="transitionMode"
                 :name="transitionName">
                 <navigation>
-                    <router-view class="contentMain"></router-view>
+                    <router-view 
+                        v-on:setHeader="setHeader"
+                        class="contentMain"></router-view>
                 </navigation>
             </transition>
         </div>
@@ -19,20 +28,37 @@
 </template>
 
 <script lang="babel">
-    // import _ from 'lodash';
+    import _ from 'lodash';
+    import router from './router';
+
     // import loading from './components/domMinx/loading';
 
+    const herderLeftInit = {
+        template: '<span @click="back" class="back-btn"></span>',
+        methods: {
+            back() {
+                router.back();
+            }
+        }
+    };
     export default {
         name: 'vue-demo',
         components: {
-            VueHeader: require('@/components/header')
+            VueHeader: require('@/components/header'),
+            headerLeftBtn: {},
+            headerRightBtn: {},
         },
         data() {
             return {
                 view: true,
                 transitionClass: '',
                 transitionName: '',
-                transitionMode: 'in-out'
+                transitionMode: 'in-out',
+                // header
+                title: '',
+                headerLeftBtn: herderLeftInit,
+                headerRightBtn: null,
+                headerClass: '',
             };
         },
         computed: {},
@@ -52,8 +78,15 @@
         },
         mounted() {},
         methods: {
+            setHeader(config) {
+                _.extend(this, {
+                    headerLeftBtn: herderLeftInit,
+                    headerRightBtn: null,
+                    title: '',
+                    headerClass: ''
+                }, config);
+            },
             routeFadeIn() {
-                // loading.show();
                 // console.log('打开新的页面');
                 this.transitionName = 'slideIn';
                 this.transitionMode = 'in-out';

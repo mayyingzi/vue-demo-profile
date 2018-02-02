@@ -2,6 +2,7 @@ import Vue from 'vue';
 // import VuexRouterSync from 'vuex-router-sync';
 // 路由缓存处理
 import Navigation from 'vue-navigation';
+import 'babel-polyfill';
 
 import App from './App';
 import router from './router';

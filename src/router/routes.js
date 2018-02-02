@@ -10,12 +10,6 @@ const title = (page) => ({
 
 export default [
     {
-        path: '*',
-        name: 'pageNotFound',
-        meta: title('pageNotFound'),
-        component: view('pageNotFound')
-    },
-    {
         path: '/login',
         name: 'loginView',
         meta: title('loginView'),
@@ -26,5 +20,12 @@ export default [
         name: 'testPage',
         meta: title('testPage'),
         component: view('testPage')
+    },
+    {
+        // 404 正则匹配(最好写在最后)
+        path: '*',
+        name: 'pageNotFound',
+        meta: title('pageNotFound'),
+        component: view('pageNotFound')
     }
 ];

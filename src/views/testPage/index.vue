@@ -55,13 +55,21 @@ export default {
         ...mapGetters(['toastMsg', 'alertOpts'])
     },
     activated() {
-        console.log('组件已激活：此处作为页面的初始化数据更新');
+        // console.log('组件已激活：此处作为页面的初始化数据更新');
+        this.resetHeader();
     },
     mounted() {
         console.log('创建成功');
     },
     methods: {
         ...mapActions(['alert', 'toast']),
+        // reset header
+        resetHeader() {
+            this.$emit('setHeader', {
+                title: '测试页面显示标题',
+                headerLeftBtn: null
+            });
+        },
         cshowAlert() {
             this.alert({ message: this.error.msg, ...this.error });
         },

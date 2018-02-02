@@ -2,7 +2,7 @@
     <transition name="fade" mode="in-out">
         <div class="alertWrapper mask" v-if="show">
             <div class="alert">
-                <div class="message">{{ message }}</div>
+                <div class="message" v-html="message"></div>
                 <div class="singleBtn"
                     v-if="buttons === 1"
                     @click="btnHandler('single')">

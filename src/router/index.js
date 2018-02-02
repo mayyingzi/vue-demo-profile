@@ -5,7 +5,10 @@ import applyRouterMiddleware from './applyMiddleware';
 
 Vue.use(Router);
 
-const router = new Router({ routes});
+const router = new Router({
+    routes
+    // mode: 'history'
+});
 
 applyRouterMiddleware(router);
 
