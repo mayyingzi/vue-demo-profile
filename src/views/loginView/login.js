@@ -19,6 +19,24 @@ export default {
     },
     data() {
         return {
+            loginTime: [
+                {
+                    time: '2018-2-5',
+                    txt: '设置文案2-5'
+                },
+                {
+                    time: '2018-2-4',
+                    txt: '设置文案2-4'
+                },
+                {
+                    time: '2018-2-3',
+                    txt: '设置文案2-3'
+                },
+                {
+                    time: '2018-2-2',
+                    txt: '设置文案2-2'
+                },
+            ]
             // customAlert: {
             //     buttons: 2,
             //     leftBtn: {
@@ -56,7 +74,7 @@ export default {
                 console.log(param);
                 this.alert({
                     message: `<p style="color:#ff4d6a">${param}</p>`
-                })
+                });
             });
         },
         goThird() {

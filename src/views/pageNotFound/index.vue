@@ -11,6 +11,17 @@ export default {
         routePath() {
             return this.$route.fullPath;
         }
+    },
+    activated() {
+        this.resetHeader();
+    },
+    methods: {
+        resetHeader() {
+            this.$emit('setHeader', {
+                title: '抱歉，该页面正在玩命修复中。。。。',
+                headerLeftBtn: null
+            });
+        }
     }
 };
 </script>
@@ -22,7 +33,7 @@ export default {
     font-size rem(18)
     color $fcGrey
     text-align center
-    margin-top 50%
+    padding-top 50%
     .tip
         margin rem(10)
 </style>

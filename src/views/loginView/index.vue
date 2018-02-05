@@ -1,6 +1,17 @@
 <template lang="html">
     <div class="loginView">
         登录页面
+        <p>timeLine</p>
+        <div class="login-time">
+            <div class="time-item" v-for="(item, index) in loginTime">
+                <div class="line"></div>
+                <div class="circle"><i></i></div>
+                <div class="main-txt">
+                    <h5>{{item.time}}</h5>
+                    <p>{{item.txt}}</p>
+                </div>
+            </div>
+        </div>
         <div class="go-third" @click="goThird">
             进入第三层页面，处理缓存机制
         </div>
@@ -18,4 +29,3 @@
 </template>
 <script src='./login.js' lang='babel'></script>
 <style src='./login.styl' lang='stylus' scoped></style>
-

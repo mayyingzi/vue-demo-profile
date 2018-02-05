@@ -7,7 +7,7 @@ export default (router) => {
     router.beforeEach((to, from, next) => {
         const historyNav = getNavSession();
         if (to.query.ZXY || historyNav) {
-            if (_.indexOf(getNavSession(), `${to.name}?${to.query.ZXY}`) < 0) {
+            if (_.indexOf(historyNav, `${to.name}?${to.query.ZXY}`) < 0) {
                 loading.show();
             }
             const { title } = to.meta;

@@ -11,6 +11,7 @@
             <span slot="right"><component
                 v-bind:is="headerRightBtn" ></component></span>
         </vue-header>
+
         <!-- <router-view></router-view> -->
         <div class="main-box" :class="transitionClass">
             <transition 
@@ -23,7 +24,9 @@
                 </navigation>
             </transition>
         </div>
-        
+
+        <!-- footer -->
+        <vue-footer></vue-footer>
     </div>
 </template>
 
@@ -45,6 +48,7 @@
         name: 'vue-demo',
         components: {
             VueHeader: require('@/components/header'),
+            VueFooter: require('@/components/footer'),
             headerLeftBtn: {},
             headerRightBtn: {},
         },
