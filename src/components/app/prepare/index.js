@@ -5,7 +5,9 @@
  */
 
 import filter from '../../../vue/filters';
+import directives from '../../../vue/directives';
 
 export default (Vue) => {
     filter(Vue);
+    directives(Vue);
 };

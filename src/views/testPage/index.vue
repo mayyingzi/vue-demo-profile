@@ -3,15 +3,20 @@
         <div class="test-go-derict">
             <p class="go-item" @click="goDirect('/login')" >跳转登录页面</p>
         </div>
-        <p class="test-tit">组件demo测试</p>
         <div class="test-compentent">
-            <p class="item-i" @click="cshowAlert">显示弹窗</p>
-            <p class="item-i" @click="cshowToast">显示toast</p>
-            <p class="item-i" @click="cshowLoading">显示loading</p>
-            <p class="item-i">过滤器过99的数据显示为：{{100 | parseNumPoint}}</p>
-            <p class="item-i">过滤器过99的数据显示为：{{100 | parseNum}}</p>
+            <div class="item-i" @click="cshowAlert">显示弹窗</div>
+            <div class="item-i" @click="cshowToast">显示toast</div>
+            <div class="item-i" @click="cshowLoading">显示loading</div>
+            <div class="item-i">过滤器过99的数据显示为：{{100 | parseNumPoint}}</div>
+            <div class="item-i">过滤器过99的数据显示为：{{100 | parseNum}}</div>
+            <div class="item-i">过滤器转换为金额显示方式<p>-12.3663：</p>{{-12.3663 | parseMoney(true)}}</div>
+            <div class="item-i">过滤器转换为金额显示方式<p>-12266399.3663：</p>{{-12266399.3663 | parseMoney}}</div>
+            <div class="item-i">过滤器转换为金额显示方式<p>12：</p>{{12 | parseMoney}}</div>
+            <div class="item-i">过滤器转换为金额显示方式<p>-12.0：</p>{{-12.0 | parseMoney(true)}}</div>
+            <div class="item-i">过滤器转换位数字单位显示方式<p>12365.056：</p>{{12365.056 | parseNumUnit}}</div>
             
         </div>
+        <div class="test-dir" v-testDirec>测试指令注册testDirec</div>
         <i class="test-arrow">测试箭头</i>
         <loading v-if="loading" :text="loadingText" />
 
