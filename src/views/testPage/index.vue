@@ -3,6 +3,10 @@
         <div class="test-go-derict">
             <p class="go-item" @click="goDirect('/login')" >跳转登录页面</p>
         </div>
+        <!-- 无限滚动测试 -->
+        <div class="test-go-derict">
+            <p class="go-item" @click="goPull">点击跳转进入无线滚动测试</p>
+        </div>
         <div class="test-compentent">
             <div class="item-i" @click="cshowAlert">显示弹窗</div>
             <div class="item-i" @click="cshowToast">显示toast</div>
@@ -31,12 +35,15 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import loading from '../../components/Loading';
+import toast from '../../components/Toast';
+import alert from '../../components/Alert';
 
 export default {
     components: {
-        loading: require('@/components/Loading'),
-        toast: require('@/components/Toast'),
-        alert: require('@/components/Alert')
+        loading,
+        toast,
+        alert
     },
     data() {
         return {
@@ -98,6 +105,10 @@ export default {
                     }
                 }
             });
+        },
+        goPull() {
+            // 跳转进入无线滚动测试页面
+            this.$router.push('/test-pull');
         }
     }
 };

@@ -32,6 +32,9 @@
 
 <script lang="babel">
     import _ from 'lodash';
+    import VueHeader from '@/components/header';
+    // import VueFooter from '@/components/footer';
+    
     import router from './router';
 
     // import loading from './components/domMinx/loading';
@@ -47,8 +50,10 @@
     export default {
         name: 'vue-demo',
         components: {
-            VueHeader: require('@/components/header'),
-            VueFooter: require('@/components/footer'),
+            VueHeader,
+            // VueFooter,
+            // VueHeader: require('@/components/header'),
+            VueFooter: require('@/components/footer').default,
             headerLeftBtn: {},
             headerRightBtn: {},
         },

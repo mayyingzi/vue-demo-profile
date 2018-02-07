@@ -2,6 +2,7 @@ import { mapGetters, mapActions } from 'vuex';
 import Vue from 'vue';
 import eventBus from '../../utils/eventBus';
 import { HEADER_RIGHT_CLICK } from '../../utils/eventBus';
+import alert from '@/components/Alert';
 
 const headerRightBtn = {
     template: '<p class="small" @click="showAggr">帮助文档</p>',
@@ -15,7 +16,8 @@ const headerRightBtn = {
 export default {
     name: 'loginView',
     components: {
-        alert: require('@/components/Alert')
+        // alert: require('@/components/Alert')
+        alert
     },
     data() {
         return {
@@ -35,7 +37,7 @@ export default {
                 {
                     time: '2018-2-2',
                     txt: '设置文案2-2'
-                },
+                }
             ]
             // customAlert: {
             //     buttons: 2,

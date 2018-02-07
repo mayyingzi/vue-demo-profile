@@ -5,5 +5,6 @@
 export default {
     userCenter: '/userCenter/index',
     testPutMethod: '/method/put',
-    testPostMethod: '/method/post'
+    testPostMethod: '/method/post',
+    goodsList: '/goods/list'
 };
