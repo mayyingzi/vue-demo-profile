@@ -22,8 +22,14 @@
         </div>
         <div class="test-dir" v-testDirec>测试指令注册testDirec</div>
         <i class="test-arrow">测试箭头</i>
+        <!-- 测试echarts -->
+        <div class="item-i" @click="goEcharts">查看更多echarts demo</div>        
+        <div class="item-i" @click="changeEcharts">点击修改echarts数据</div>
+        <chart
+            :auto-resize="true" 
+            :options ="polar"></chart>
         <loading v-if="loading" :text="loadingText" />
-
+        
         <toast :message="toastMsg" />
         <alert :message="alertOpts.message"
             :buttons="alertOpts.buttons"
@@ -33,8 +39,11 @@
     </div>  
 </template>
 
-<script>
+<script lang="babel">
 import { mapActions, mapGetters } from 'vuex';
+import Echarts from 'vue-echarts/components/ECharts';
+import 'echarts/lib/chart/line';
+import 'echarts/lib/component/polar';
 import loading from '../../components/Loading';
 import toast from '../../components/Toast';
 import alert from '../../components/Alert';
@@ -43,9 +52,18 @@ export default {
     components: {
         loading,
         toast,
-        alert
+        alert,
+        chart: Echarts
     },
     data() {
+        const data = [];
+
+        for (let i = 0; i <= 360; i++) {
+            let t = i / 180;
+            t *= Math.PI;
+            const r = Math.sin(2 * t) * Math.cos(2 * t);
+            data.push([r, i]);
+        }
         return {
             error: {
                 msg: '测试吧',
@@ -60,7 +78,42 @@ export default {
                 }
             },
             loading: false,
-            loadingText: '加载中'
+            loadingText: '加载中',
+            // echarts data
+            polar: {
+                title: {
+                    text: '极坐标双数值轴'
+                },
+                legend: {
+                    data: ['line']
+                },
+                polar: {
+                    center: ['50%', '50%']
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                angleAxis: {
+                    type: 'value',
+                    startAngle: 0
+                },
+                radiusAxis: {
+                    min: 0
+                },
+                series: [
+                    {
+                        coordinateSystem: 'polar',
+                        name: 'line',
+                        type: 'line',
+                        showSymbol: false,
+                        data
+                    }
+                ],
+                animationDuration: 2000
+            }
         };
     },
     computed: {
@@ -106,9 +159,17 @@ export default {
                 }
             });
         },
+        goEcharts() {
+            this.$router.push('/test-echarts');
+        },
         goPull() {
             // 跳转进入无线滚动测试页面
             this.$router.push('/test-pull');
+        },
+        changeEcharts() {
+            const rand = Math.random(0, 1) * 10;
+            this.polar.angleAxis.startAngle = rand * 360;
+            this.polar.radiusAxis.min = rand;
         }
     }
 };
@@ -116,7 +177,6 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../../assets/styles/mixins'
-
 .testPage
     font-size rem(28)
     color $fcGrey
@@ -135,14 +195,14 @@ export default {
         margin 0 auto rem(20)
     .test-arrow
         font-size rem(24)
-        line-height 1.2em;
+        line-height 1.2em
         display block
         font-size rem(20)
         font-style normal
         width 80%
         padding rem(20)
         margin 0 auto
-        arrowGreyUp(0.2,0.2)
+        arrowGreyUp(0.2, 0.2)
         retinaBorder(false, false, false, true)
     .test-go-derict
         padding rem(10)
@@ -153,5 +213,8 @@ export default {
             line-height 1.2em
             retinaBorder(true, true, true, true)
             padding rem(20)
-            
+.echarts
+    width 100%
+    height rem(600)
+    padding-bottom rem(60)
 </style>

@@ -146,13 +146,11 @@ require('../../assets/styles/icon/iconfont');
 </script>
 
 <style lang="stylus" scoped>
-@import '../../assets/styles/mixins';
-
-
+@import '../../assets/styles/mixins'
 .testPull
-    font-size rem(28) 
+    font-size rem(28)
     box-sizing border-box
-    overflow hidden   
+    overflow hidden
     .show-main
         display flex
         flex-wrap wrap
@@ -163,11 +161,10 @@ require('../../assets/styles/icon/iconfont');
             box-sizing border-box
             padding-left rem(10)
             padding-right rem(10)
-            padding-bottom rem(20)          
+            padding-bottom rem(20)
             .item-wrap
                 border 1px solid #ccc
                 padding-bottom rem(10)
-                              
             .goods-img
                 position relative
                 width 100%
@@ -191,5 +188,4 @@ require('../../assets/styles/icon/iconfont');
                 display -webkit-box
                 -webkit-line-clamp 2
                 -webkit-box-orient vertical
-
 </style>

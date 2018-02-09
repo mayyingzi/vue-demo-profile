@@ -28,6 +28,12 @@ export default [
         component: view('testPull')
     },
     {
+        path: '/test-echarts',
+        name: 'testEcharts',
+        meta: title('testEcharts'),
+        component: view('testEcharts')
+    },
+    {
         // 404 正则匹配(最好写在最后)
         path: '*',
         name: 'pageNotFound',

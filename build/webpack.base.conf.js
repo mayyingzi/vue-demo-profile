@@ -1,11 +1,11 @@
-var path = require('path')
-var webpack = require('webpack')
-var utils = require('./utils')
-var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
+var path = require('path');
+var webpack = require('webpack');
+var utils = require('./utils');
+var config = require('../config');
+var vueLoaderConfig = require('./vue-loader.conf');
 
 function resolve(dir) {
-    return path.join(__dirname, '..', dir)
+    return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
@@ -15,14 +15,15 @@ module.exports = {
     output: {
         path: config.build.assetsRoot,
         filename: '[name].js',
-        publicPath: process.env.NODE_ENV === 'production'
-            ? config.build.assetsPublicPath
-            : config.dev.assetsPublicPath
+        publicPath:
+            process.env.NODE_ENV === 'production'
+                ? config.build.assetsPublicPath
+                : config.dev.assetsPublicPath
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
-            'vue$': 'vue/dist/vue.esm.js',
+            vue$: 'vue/dist/vue.esm.js',
             // 'vue$': 'vue/dist/vue.common.js',
             '@': resolve('src')
         }
@@ -46,7 +47,12 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: [resolve('src'), resolve('test')]
+                include: [
+                    resolve('src'),
+                    resolve('test'),
+                    resolve('node_modules/vue-echarts'),
+                    resolve('node_modules/resize-detector')
+                ]
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -72,8 +78,8 @@ module.exports = {
                 stylus: {
                     use: [require('nib')()],
                     import: ['~nib/lib/nib/index.styl']
-                },
+                }
             }
         })
     ]
-}
+};
