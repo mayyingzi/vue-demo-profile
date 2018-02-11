@@ -8,13 +8,17 @@ $redColor = #ff4d6a
     .tit
         text-align left
     .per-part
-        display flex
+        // display flex
     .item-tit
-        display inline
-        text-align center
+        width 100%        
+        text-align left
         padding rem(20)
-        // border-radius rem(8)
-        border-right 4px solid $redColor
+        border-left rem(4) solid $redColor
         color $redColor
+        box-sizing border-box
     .item-main
+        width 100%
+        box-sizing border-box
         padding rem(10) 0 rem(30)
+        .echarts
+            height rem(500)

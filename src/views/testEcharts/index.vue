@@ -2,10 +2,14 @@
     <div class="testEcharts">
         <div class="per-part">
             <div class="item-tit">
-                polar
+                bar
             </div>
-            <div class="item-main">
-
+            <div class="item-main bar-main">
+                <chart
+                    :options="bar"
+                    ref="bar"
+                    auto-resize
+                />
             </div>
         </div>
         
