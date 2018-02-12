@@ -12,7 +12,33 @@
                 />
             </div>
         </div>
-        
+
+        <div class="per-part">
+            <div class="item-tit">
+                pie
+            </div>
+            <div class="item-main bar-main">
+                <chart
+                    :options="pie"
+                    ref="pie"
+                    auto-resize
+                />
+            </div>
+        </div>
+
+        <div class="per-part">
+            <div class="item-tit">
+                line
+            </div>
+            <div class="item-main bar-main">
+                <chart
+                    :options="line"
+                    ref="pie"
+                    auto-resize
+                />
+            </div>
+        </div>
+
     </div>
 </template>
 

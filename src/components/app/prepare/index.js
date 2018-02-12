@@ -4,10 +4,15 @@
  * router use
  */
 
+// import BaiduMap from 'vue-baidu-map';
 import filter from '../../../vue/filters';
 import directives from '../../../vue/directives';
 
 export default (Vue) => {
     filter(Vue);
     directives(Vue);
+    // 百度地图
+    // Vue.use(BaiduMap, {
+    //     ak: 'g1542o1SimgGE7GDuQvsx12nNU7MagD1'
+    // });
 };

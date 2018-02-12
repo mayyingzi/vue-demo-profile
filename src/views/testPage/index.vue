@@ -28,6 +28,26 @@
         <chart
             :auto-resize="true" 
             :options ="polar"></chart>
+        
+        <div class="item-i">百度地图测试</div>
+        <div class="map-wrap">
+            <baidu-map class="bm-view"
+                ak="g1542o1SimgGE7GDuQvsx12nNU7MagD1"
+                :center ="center"
+                :zoom = "zoom"
+                @ready="handler"
+            >
+                <bm-geolocation
+                    :showAddreBar=true
+                    :autoLocation=true
+                    anchor="BMAP_ANCHOR_BOTTOM_RIGHT"
+                    @locationSuccess="locationSuccess"
+                    @locationError="locationError"
+                >
+                </bm-geolocation>
+            </baidu-map>
+           
+        </div>
         <loading v-if="loading" :text="loadingText" />
         
         <toast :message="toastMsg" />
@@ -42,6 +62,7 @@
 <script lang="babel">
 import { mapActions, mapGetters } from 'vuex';
 import Echarts from 'vue-echarts/components/ECharts';
+import {BaiduMap, BmGeolocation} from 'vue-baidu-map';
 import 'echarts/lib/chart/line';
 import 'echarts/lib/component/polar';
 import loading from '../../components/Loading';
@@ -53,7 +74,9 @@ export default {
         loading,
         toast,
         alert,
-        chart: Echarts
+        chart: Echarts,
+        BaiduMap,
+        BmGeolocation
     },
     data() {
         const data = [];
@@ -79,6 +102,20 @@ export default {
             },
             loading: false,
             loadingText: '加载中',
+            // 地图的核心类
+            BMap: null,
+            // map 地图实例
+            map:null,
+            // 地图Search实例
+            Geocoder:null,
+            center: {
+                default: '北京市'
+            },
+            position: {
+                lgn: 0,
+                lat: 0
+            },
+            zoom: 3,
             // echarts data
             polar: {
                 title: {
@@ -118,6 +155,14 @@ export default {
     },
     computed: {
         ...mapGetters(['toastMsg', 'alertOpts'])
+    },
+    watch: {
+        center(newVal) {
+            this.Geocoder.getPoint(newVal, (point) => {
+                this.map.centerAndZoom(point, 16);
+                this.center = point;
+            }, '北京市');
+        }
     },
     activated() {
         // console.log('组件已激活：此处作为页面的初始化数据更新');
@@ -170,6 +215,28 @@ export default {
             const rand = Math.random(0, 1) * 10;
             this.polar.angleAxis.startAngle = rand * 360;
             this.polar.radiusAxis.min = rand;
+        },
+        handler({BMap, map}) {
+            this.map = map;
+            this.Geocoder = new BMap.Geocoder();
+            // this.position.lng = 116.404;
+            // this.position.lat = 39.915;
+            // this.center = '成都市';
+            this.zoom = 15;
+            // 获取当前位置
+            const curAddr = new BMap.LocalCity();
+            curAddr.get((result) => {
+                this.position = result.center;
+                this.center = result.name;
+            });
+        },
+        // 执行定位成功
+        locationSuccess({point, addressComponent}) {
+            console.log(point);
+            console.log(addressComponent);
+        },
+        locationError(status) {
+            console.log(status);
         }
     }
 };
@@ -217,4 +284,9 @@ export default {
     width 100%
     height rem(600)
     padding-bottom rem(60)
+.map-wrap
+    padding rem(20)
+    .bm-view
+        width 100%
+        height rem(300)
 </style>
