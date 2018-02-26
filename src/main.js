@@ -3,12 +3,14 @@ import Vue from 'vue';
 // 路由缓存处理
 import Navigation from 'vue-navigation';
 import 'babel-polyfill';
+import VueRecyclerviewNew from 'vue-recyclerview';
 
 import App from './App';
 import router from './router';
 import store from './store';
 import ajax from './http/ajax';
 import prepare from './components/app/prepare';
+import addStateGL from './utils/weGLStateDom';
 
 prepare(Vue);
 
@@ -21,6 +23,8 @@ Vue.use(Navigation, {
     moduleName: 'navigation',
     keyName: 'ZXY'
 });
+
+Vue.use(VueRecyclerviewNew);
 
 // 注入 router 和 store
 Vue.$router = router;
@@ -35,3 +39,6 @@ new Vue({
     store,
     template: '<App/>'
 }).$mount('#app');
+
+// add state
+addStateGL();

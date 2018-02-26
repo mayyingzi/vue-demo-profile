@@ -7,6 +7,9 @@
         <div class="test-go-derict">
             <p class="go-item" @click="goPull">点击跳转进入无线滚动测试</p>
         </div>
+        <div class="test-go-derict">
+            <p class="go-item" @click="goDirect('/vue-code')" >vue源码解读</p>
+        </div>
         <div class="test-compentent">
             <div class="item-i" @click="cshowAlert">显示弹窗</div>
             <div class="item-i" @click="cshowToast">显示toast</div>
@@ -70,6 +73,7 @@ import toast from '../../components/Toast';
 import alert from '../../components/Alert';
 
 export default {
+    name: 'testPage',
     components: {
         loading,
         toast,

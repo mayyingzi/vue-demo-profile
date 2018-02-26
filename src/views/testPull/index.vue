@@ -1,5 +1,16 @@
 <template lang="html">
     <div class="testPull">
+        <RecyclerView
+            :prerender="30"
+            :remain ="30"
+            :column="2"
+            style="height: calc(100vh - 50px)"
+            :fetch="recycleFetch" 
+            :item="MiItem" 
+            :tombstone="MiTomstone"
+        ></RecyclerView>
+        <!-- 下拉顶部刷新， 都不上划，加载更多 -->
+        <!--
         <pull-to 
             :bottom-load-method="loadmore"
             :bottom-block-height = "90"
@@ -9,8 +20,9 @@
             :top-config = "TOP_DEFAULT_CONFIG"
             :top-block-height = "90"
             :top-load-method="refresh">
+        -->
             <!-- vue 2.5 use slot-scope -->
-            <template slot="top-block" slot-scope="props">
+            <!-- <template slot="top-block" slot-scope="props">
                 <div class="top-load-wrapper">
                     <svg class="icon"
                         :class="{
@@ -22,8 +34,9 @@
                     </svg>
                     {{ props.stateText }}
                 </div>
-            </template>
-            <ul class="show-main">
+            </template> -->
+            
+            <!-- <ul class="show-main">
                 <li class="item" v-for="item in dataList">
                     <div class="item-wrap">
                         <div class="goods-img">
@@ -32,10 +45,10 @@
                         <p class="tit">{{item.goods_title}}</p>
                     </div>                    
                 </li>
-            </ul>
+            </ul> -->
             <!-- 底部 -->
             <!-- vue 2.5 use slot-scope -->
-            <template slot="bottom-block" slot-scope="props">
+            <!-- <template slot="bottom-block" slot-scope="props">
                 <div class="bottom-load-wrapper">
                     <svg class="icon"
                         :class="{
@@ -47,22 +60,28 @@
                     </svg>
                     {{ props.stateText }}
                 </div>
-            </template>
+            </template> -->
 
-        </pull-to>
+        <!-- </pull-to> -->
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
 import PullTo from 'vue-pull-to';
+// import Recyclerview from 'vue-recyclerview';
+import MiItem from './Item';
+import MiTomstone from './Tombstone';
 
 export default {
     components: {
         PullTo
+        // Recyclerview
     },
     data() {
         return {
+            MiItem,
+            MiTomstone,
             page: 0,
             hasMore: true,
             pageCount: 0,
@@ -139,29 +158,43 @@ export default {
             return Vue.$ajax.get('goodsList', {
                 page: this.page
             });
+        },
+        async recycleFetch() {
+            const res = await this.fetchData(false);
+            this.dataList = this.dataList.concat(res.goods_list);
+            return Promise.resolve({
+                list: res.goods_list,
+                count: 80
+            });
         }
     }
 };
 require('../../assets/styles/icon/iconfont');
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 @import '../../assets/styles/mixins'
 .testPull
     font-size rem(28)
     box-sizing border-box
     overflow hidden
-    .show-main
+    .show-main, .recyclerview
         display flex
         flex-wrap wrap
         padding-left rem(10)
         padding-right rem(10)
+    .recyclerview
+        padding 0
         .item
             width 50%
             box-sizing border-box
             padding-left rem(10)
             padding-right rem(10)
             padding-bottom rem(20)
+            &.item:nth-child(odd)
+                padding-left rem(20)
+            &.item:nth-child(even)
+                padding-right rem(20)
             .item-wrap
                 border 1px solid #ccc
                 padding-bottom rem(10)

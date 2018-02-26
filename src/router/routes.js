@@ -34,6 +34,12 @@ export default [
         component: view('testEcharts')
     },
     {
+        path: '/vue-code',
+        name: 'vueCode',
+        meta: title('vueCode'),
+        component: view('vueCode')
+    },
+    {
         // 404 正则匹配(最好写在最后)
         path: '*',
         name: 'pageNotFound',
