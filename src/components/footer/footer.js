@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         updateNowItem() {
-            const RegPath = /^(\/|\/order|\/cart|\/center)$/;
+            const RegPath = /^(\/zIndex|\/order|\/cart|\/center)$/;
             const initItem = this.curRoterP;
             if (RegPath.test(initItem)) {
                 this.isShow = true;

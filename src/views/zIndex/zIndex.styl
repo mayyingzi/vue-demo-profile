@@ -1,0 +1,129 @@
+@import '../../assets/styles/mixins.styl'
+
+.zIndezPage
+    background-color #eee
+    font-size rem(26)
+    color #333
+    .ad-posi
+        width 100%
+        padding-top 30.6%
+        position relative
+        overflow hidden
+        .swiper-pagination-bullet
+            width rem(12)
+            height rem(12)
+        .swiper-pagination-bullet-active
+            background-color #f60
+            width rem(14)
+            height rem(14)
+        .ad-main
+            position absolute
+            left 0
+            right 0
+            top 0
+            height 100%
+            background-color #ccc
+        
+        .swiper-container
+            height 100%
+            width 100%
+            img
+                display block
+                height 100%
+                width 100%
+    .remTab
+        display flex
+        flex-wrap wrap
+        box-sizing border-box
+        padding rem(16) rem(8)
+        background-color #fff
+        justify-content space-around
+        .tabItem
+            // width 31%
+            width rem(238)
+            height rem(148)
+            background-position center center
+            background-size 100%
+            // margin-left rem(8)
+            // margin-right rem(8)
+            box-sizing border-box
+
+            // border-radius rem(4)
+            // box-shadow 1px 2px 5px 2px rgba(0,0,0, 0.2)
+            &:first-child
+                background-image url("../../assets/images/sale_fix.png")
+                .desc
+                    color #3d79aa 
+            &:nth-child(2)
+                background-image url("../../assets/images/sale_race.png") 
+                .desc
+                    color #c37452
+            &:last-child
+                width rem(208)
+                background-image url("../../assets/images/sale_offer.png") 
+                .desc
+                    color #dca52f
+            .tit
+                color #fff
+                font-size rem(28)
+                padding-left rem(20)
+                padding-top rem(12)
+            .desc
+                font-size rem(24)
+                padding-left rem(20)
+                padding-top rem(4)
+    .recommend-tit
+        font-size rem(24)
+        padding rem(16) rem(12)
+        color #999
+    .recommend-tab
+        background-color #fff
+        width 100%
+        height rem(88)
+        line-height rem(88)
+        display flex
+        text-align center
+        align-items center
+        margin-bottom rem(1)
+        .tab-item
+            font-size rem(30)
+            flex 1
+            height 100%
+            position relative
+            .text
+                display inline-block
+                &::after
+                    content ""
+                    position absolute
+                    height rem(4)
+                    width rem(72)
+                    bottom 0
+                    left 50%
+                    transform translate(-50%, 0)
+                    background-color #fff
+            &.cur
+                .text
+                    color #f60
+                    &::after
+                        background-color #f60
+    .recommened-main
+        .list-item
+            display flex
+            box-sizing border-box
+            border-bottom rem(1) solid #eee
+            padding rem(30)
+            background-color #fff
+            .item-img
+                width rem(88)
+                height rem(88)
+            .item-right
+                flex 1
+                padding-left rem(20)
+            .goods-name
+                font-size rem(30)
+                
+            
+
+
+        
+                        

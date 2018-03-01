@@ -10,7 +10,7 @@ import router from './router';
 import store from './store';
 import ajax from './http/ajax';
 import prepare from './components/app/prepare';
-import addStateGL from './utils/weGLStateDom';
+// import addStateGL from './utils/weGLStateDom';
 
 prepare(Vue);
 
@@ -41,4 +41,4 @@ new Vue({
 }).$mount('#app');
 
 // add state
-addStateGL();
+// addStateGL();

@@ -1,21 +1,21 @@
-<!-- footer页面 -->
+<!-- 买家 footer页面 -->
 <template lang="html">
     <div class="footer componet-footer" v-show="isShow">
         <div class="ft-main">
             <div 
-                @click="goPath({item:'/', path:'/'})"
-                :class="{actived: nowItem === '/'}"
+                @click="goPath({item:'/zIndex', path:'/zIndex'})"
+                :class="{actived: nowItem === '/zIndex'}"
                 class="ft-item">
                 <div class="ft-icon goods-icon"></div>
                 <p class="tit">商品</p>
             </div>
-            <div 
+            <!-- <div 
                  @click="goPath({item:'/cart', path:'/cart'})"
                 :class="{actived: nowItem === '/cart'}"
                 class="ft-item">
                 <div class="ft-icon cart-icon"></div>
                 <p class="tit">求购</p>
-            </div>
+            </div> -->
             <div
                 @click="goPath({item:'/order', path:'/order'})"
                 :class="{actived: nowItem === '/order'}" 

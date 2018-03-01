@@ -1,19 +1,20 @@
-var path = require('path')
-var utils = require('./utils')
-var webpack = require('webpack')
-var config = require('../config')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var path = require('path');
+var utils = require('./utils');
+var webpack = require('webpack');
+var config = require('../config');
+var merge = require('webpack-merge');
+var baseWebpackConfig = require('./webpack.base.conf');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 // lodash 处理
 var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
-var env = process.env.NODE_ENV === 'testing'
-    ? require('../config/test.env')
-    : config.build.env
+var env =
+    process.env.NODE_ENV === 'testing'
+        ? require('../config/test.env')
+        : config.build.env;
 
 var webpackConfig = merge(baseWebpackConfig, {
     module: {
@@ -31,27 +32,27 @@ var webpackConfig = merge(baseWebpackConfig, {
     plugins: [
         // http://vuejs.github.io/vue-loader/en/workflow/production.html
         new webpack.DefinePlugin({
-            'process.env': env,
+            'process.env': env
         }),
         // https://www.npmjs.com/package/lodash-webpack-plugin
         new LodashModuleReplacementPlugin({
             // removed by default个别方法需要引入,/(ㄒoㄒ)/~~
-            'shorthands': true,
-            'cloning': true,
+            shorthands: true,
+            cloning: true,
             // 'currying': true,
             // 'caching': true,
-            'collections': true,
+            collections: true,
             // 'exotics': true,
             // 'guards': true,
-            'metadata':true,
+            metadata: true,
             // 'deburring':true,
-            'unicode': true,
-            'memoizing':true,
+            unicode: true,
+            memoizing: true,
             // 开启字符串强制类型转换
-            'coercions': true,
-            'flattening': true,
-            'paths': true,
-            'placeholders': true
+            coercions: true,
+            flattening: true,
+            paths: true,
+            placeholders: true
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -74,9 +75,10 @@ var webpackConfig = merge(baseWebpackConfig, {
         // you can customize output by editing /index.html
         // see https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
-            filename: process.env.NODE_ENV === 'testing'
-                ? 'index.html'
-                : config.build.index,
+            filename:
+                process.env.NODE_ENV === 'testing'
+                    ? 'index.html'
+                    : config.build.index,
             template: 'index.html',
             inject: true,
             minify: {
@@ -93,7 +95,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // split vendor js into its own file
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks: function (module, count) {
+            minChunks: function(module, count) {
                 // any required modules inside node_modules are extracted to vendor
                 return (
                     module.resource &&
@@ -101,7 +103,7 @@ var webpackConfig = merge(baseWebpackConfig, {
                     module.resource.indexOf(
                         path.join(__dirname, '../node_modules')
                     ) === 0
-                )
+                );
             }
         }),
         // extract webpack runtime and module manifest to its own file in order to
@@ -119,29 +121,28 @@ var webpackConfig = merge(baseWebpackConfig, {
             }
         ])
     ]
-})
+});
 
 if (config.build.productionGzip) {
-    var CompressionWebpackPlugin = require('compression-webpack-plugin')
+    var CompressionWebpackPlugin = require('compression-webpack-plugin');
 
     webpackConfig.plugins.push(
         new CompressionWebpackPlugin({
             asset: '[path].gz[query]',
             algorithm: 'gzip',
             test: new RegExp(
-                '\\.(' +
-                config.build.productionGzipExtensions.join('|') +
-                ')$'
+                '\\.(' + config.build.productionGzipExtensions.join('|') + ')$'
             ),
             threshold: 10240,
             minRatio: 0.8
         })
-    )
+    );
 }
 
 if (config.build.bundleAnalyzerReport) {
-    var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-    webpackConfig.plugins.push(new BundleAnalyzerPlugin())
+    var BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+        .BundleAnalyzerPlugin;
+    webpackConfig.plugins.push(new BundleAnalyzerPlugin());
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

@@ -1,7 +1,9 @@
 <template lang="html">
     <div id="app">    
         <!-- header -->
-        <vue-header :class="headerClass">
+        <vue-header
+            v-show="!isNavHide"
+            :class="headerClass">
             <!-- left -->
             <span slot="left"><component
                 v-bind:is="headerLeftBtn"
@@ -68,6 +70,7 @@
                 headerLeftBtn: herderLeftInit,
                 headerRightBtn: null,
                 headerClass: '',
+                isNavHide: null
             };
         },
         computed: {},
@@ -88,11 +91,15 @@
         mounted() {},
         methods: {
             setHeader(config) {
-                _.extend(this, {
+                const initNav = {
                     headerLeftBtn: herderLeftInit,
                     headerRightBtn: null,
                     title: '',
-                    headerClass: ''
+                    headerClass: '',
+                    isNavHide: null
+                };
+                _.extend(this, {
+                    ...initNav
                 }, config);
             },
             routeFadeIn() {
