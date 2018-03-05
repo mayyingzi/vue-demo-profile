@@ -59,7 +59,7 @@ export default [
         name: 'testEcharts',
         meta: title('testEcharts'),
         // component: view('testEcharts')
-        component:testEchartsView
+        component: testEchartsView
     },
     {
         path: '/vue-code',

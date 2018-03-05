@@ -1,10 +1,7 @@
-import {
-    SET_TOKEN,
-    CLEAR_TOKEN,
-} from '../mutationTypes';
+import { SET_TOKEN, CLEAR_TOKEN } from '../mutationTypes';
 
 const state = {
-    token: null,
+    token: null
 };
 
 const mutations = {
@@ -13,7 +10,7 @@ const mutations = {
     },
     [CLEAR_TOKEN](state) {
         state.token = null;
-    },
+    }
 };
 
 // actions
@@ -24,10 +21,10 @@ export const actions = {
 
     clearToken({ commit }) {
         commit(CLEAR_TOKEN);
-    },
+    }
 };
 
 export default {
     state,
-    mutations,
+    mutations
 };

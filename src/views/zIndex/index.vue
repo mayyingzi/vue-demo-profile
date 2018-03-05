@@ -47,20 +47,72 @@
             <!-- 距离最近 -->
             <swiper-slide class="goods-list">
                 <div 
+                    v-if="distanceGoods.length"
                     v-for="(item, index) in distanceGoods"
                     :key="index"
                     class="list-item">
-                    <img
-                        :src="item.picUrl" 
-                        class="item-img">
-                    <div class="item-right">
-                        <p class="goods-name">{{item.goodsName}}</p>
-                    </div>
+                    <div class="item-msg">
+                        <!-- flag -->
+                        <img
+                            v-if="item.picUrl"
+                            :src="item.picUrl" 
+                            class="item-img">
+                        <div
+                            v-else                        
+                            class="item-default-img">
+                        </div>
+                        <div class="item-right">
+                            <p class="goods-name">{{item.goodsName}}</p>
+                            <div class="desc">
+                                <span class="price">{{item.price}}</span>
+                                <span class="unit">{{item.unit}}</span>
+                                <span class="aweight">(预估均重{{item.averageWeight}}kg)</span>
+                            </div>
+                            <div class="goods-flag">定价买</div>                        
+                        </div>
+                    </div>                    
+                    <div class="posi-main">
+                        <p class="posi">{{item.mapAddress}}</p>
+                        <p class="far">{{item.kilometers}}km</p>
+                    </div>                   
                 </div>
+                <goods-empty 
+                    msg="暂无数据"
+                    bgkey="bgBig"
+                    v-if="!distanceGoods.length">
+                </goods-empty>
             </swiper-slide>
             <!-- 价格最低 -->
             <swiper-slide>
-
+                <div 
+                    v-for="(item, index) in priceGoods"
+                    :key="index"
+                    class="list-item">
+                    <div class="item-msg">
+                        <!-- flag -->
+                        <img
+                            v-if="item.picUrl"
+                            :src="item.picUrl" 
+                            class="item-img">
+                        <div
+                            v-else                        
+                            class="item-default-img">
+                        </div>
+                        <div class="item-right">
+                            <p class="goods-name">{{item.goodsName}}</p>
+                            <div class="desc">
+                                <span class="price">{{item.price}}</span>
+                                <span class="unit">{{item.unit}}</span>
+                                <span class="aweight">(预估均重{{item.averageWeight}}kg)</span>
+                            </div>
+                            <div class="goods-flag">定价买</div>                        
+                        </div>
+                    </div>                    
+                    <div class="posi-main">
+                        <p class="posi">{{item.mapAddress}}</p>
+                        <p class="far">{{item.kilometers}}km</p>
+                    </div>                   
+                </div>
             </swiper-slide>
         </swiper>
     </div>

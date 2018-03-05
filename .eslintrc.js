@@ -22,7 +22,9 @@ module.exports = {
     },
     // add your custom rules here
     rules: {
-        indent: [2, 4],
+        indent: [2, 4, {
+            "SwitchCase": 1
+        }],
         'comma-dangle': 0,
         'key-spacing': 0,
         'object-curly-spacing': 0,

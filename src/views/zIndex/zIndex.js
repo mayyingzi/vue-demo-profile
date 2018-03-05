@@ -1,11 +1,13 @@
 import 'swiper/dist/css/swiper.css';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
+import goodsEmpty from '../../components/goodsEmpty';
 
 export default {
     name: 'zIndex',
     components: {
         swiper,
-        swiperSlide
+        swiperSlide,
+        goodsEmpty
     },
     data() {
         const _vm = this;
@@ -20,7 +22,7 @@ export default {
             },
             recommendSwiper: {
                 on: {
-                    slideChangeTransitionEnd: function() {
+                    slideChangeTransitionEnd() {
                         _vm.curRecomment = this.activeIndex;
                     }
                 }
@@ -65,7 +67,7 @@ export default {
             curRecomment: 0,
             distanceGoods: [
                 {
-                    goodsName: '外二元肥猪',
+                    goodsName: '外二元肥猪 这个名字超长，显示应该是怎样的',
                     averageWeight: '133',
                     price: 11.6,
                     unit: '元/kg',
@@ -182,11 +184,12 @@ export default {
                     imageId: 6314,
                     modelId: 1
                 }
-            ]
+            ],
         };
     },
     activated() {
         this.resetHeader();
+        this.distanceGoods = [];
     },
     methods: {
         resetHeader() {

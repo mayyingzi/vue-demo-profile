@@ -28,7 +28,6 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../../assets/styles/mixins'
-
 .pageNotFound
     font-size rem(18)
     color $fcGrey
