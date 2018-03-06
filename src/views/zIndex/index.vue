@@ -44,80 +44,33 @@
             ref="recommendSwiper"
             :options="recommendSwiper"
             class="recommened-main">
-            <!-- 距离最近 -->
-            <swiper-slide class="goods-list">
-                <div 
-                    v-if="distanceGoods.length"
-                    v-for="(item, index) in distanceGoods"
+            <!-- 距离最近、最低价格 -->
+            <swiper-slide class="goods-list" v-for="value in ['distanceGoods', 'priceGoods']" :key="value">
+                <item-temp class="list-item"
+                    v-if="goodsList[value].trading && goodsList[value].trading.length"
+                    v-for="(item, index) in goodsList[value].trading"
                     :key="index"
-                    class="list-item">
-                    <div class="item-msg">
-                        <!-- flag -->
-                        <img
-                            v-if="item.picUrl"
-                            :src="item.picUrl" 
-                            class="item-img">
-                        <div
-                            v-else                        
-                            class="item-default-img">
-                        </div>
-                        <div class="item-right">
-                            <p class="goods-name">{{item.goodsName}}</p>
-                            <div class="desc">
-                                <span class="price">{{item.price}}</span>
-                                <span class="unit">{{item.unit}}</span>
-                                <span class="aweight">(预估均重{{item.averageWeight}}kg)</span>
-                            </div>
-                            <div class="goods-flag">定价买</div>                        
-                        </div>
-                    </div>                    
-                    <div class="posi-main">
-                        <p class="posi">{{item.mapAddress}}</p>
-                        <p class="far">{{item.kilometers}}km</p>
-                    </div>                   
-                </div>
+                    :item="item" 
+                    :isTabItem="true"></item-temp>
+                
                 <goods-empty 
-                    msg="暂无数据"
+                    msg="暂无最近距离的数据"
                     bgkey="bgBig"
-                    v-if="!distanceGoods.length">
+                    v-if="(goodsList[value].trading &&!goodsList[value].trading.length) || !goodsList[value].trading">
                 </goods-empty>
-            </swiper-slide>
-            <!-- 价格最低 -->
-            <swiper-slide>
-                <div 
-                    v-for="(item, index) in priceGoods"
-                    :key="index"
-                    class="list-item">
-                    <div class="item-msg">
-                        <!-- flag -->
-                        <img
-                            v-if="item.picUrl"
-                            :src="item.picUrl" 
-                            class="item-img">
-                        <div
-                            v-else                        
-                            class="item-default-img">
-                        </div>
-                        <div class="item-right">
-                            <p class="goods-name">{{item.goodsName}}</p>
-                            <div class="desc">
-                                <span class="price">{{item.price}}</span>
-                                <span class="unit">{{item.unit}}</span>
-                                <span class="aweight">(预估均重{{item.averageWeight}}kg)</span>
-                            </div>
-                            <div class="goods-flag">定价买</div>                        
-                        </div>
-                    </div>                    
-                    <div class="posi-main">
-                        <p class="posi">{{item.mapAddress}}</p>
-                        <p class="far">{{item.kilometers}}km</p>
-                    </div>                   
-                </div>
-            </swiper-slide>
+            </swiper-slide>            
         </swiper>
+        <div class="goods-finished" v-if="curFinishedGoods">
+            <p class="recommend-tit">近期完成交易</p>
+            <item-temp class="list-item"                
+                v-for="(item, index) in curFinishedGoods"
+                :key="index"
+                :item="item" 
+                :isTabItem="false"></item-temp>
+        </div>
     </div>
 </template>
 
 <script src="./zIndex.js" lang="babel"></script>
-<style src="./zIndex.styl" lang="stylus"></style>
+<style src="./zIndex.styl" lang="stylus" scoped></style>
 

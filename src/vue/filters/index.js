@@ -79,6 +79,33 @@ const parseMoney = (value, abs) => {
     value = value.replace(regPert, ',');
     return `${sign ? '' : '-'}${value}.${cents}`;
 };
+
+const parseTime = (value, formate) => {
+    let result = '';
+    if (value) {
+        const timeCur = new Date(value);
+        const yy = timeCur.getFullYear();
+        const mm = timeCur.getMonth() + 1;
+        const dd = timeCur.getDate();
+        result = `${yy}-${mm < 10 ? `0${mm}` : mm}-${
+        dd < 10 ? `0${dd}` : dd}`;
+        if (formate) {
+            let hh = timeCur.getHours();
+            hh = hh < 10 ? `0${hh}` : hh;
+            let ms = timeCur.getMinutes();
+            ms = ms < 10 ? `0${ms}` : ms;
+            if (formate === 'hh:ms') {
+                result += ` ${hh}:${ms}`;
+            }
+            if (formate === 'hh:ms:mm') {
+                let ss = timeCur.getSeconds();
+                ss = ss < 10 ? `0${ss}` : ss;
+                result += ` ${hh}:${ms}:${ss}`;
+            }
+        }
+    }
+    return result;
+};
 /**
  * 注册过滤器 *
  * @param {Vue} Vue
@@ -88,6 +115,7 @@ const registFilter = (Vue) => {
     Vue.filter('parseNum', parseNum);
     Vue.filter('parseMoney', parseMoney);
     Vue.filter('parseNumUnit', parseNumUnit);
+    Vue.filter('parseTime', parseTime);
 };
 
 export default registFilter;

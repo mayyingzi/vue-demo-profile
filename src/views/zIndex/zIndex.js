@@ -1,13 +1,17 @@
 import 'swiper/dist/css/swiper.css';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
 import goodsEmpty from '../../components/goodsEmpty';
+import itemTemp from './itemTmp.vue';
+// mock
+import {distanceGoods, priceGoods} from '../../../mock/zIndexData';
 
 export default {
     name: 'zIndex',
     components: {
         swiper,
         swiperSlide,
-        goodsEmpty
+        goodsEmpty,
+        itemTemp
     },
     data() {
         const _vm = this;
@@ -31,17 +35,17 @@ export default {
                 {
                     tit: '发布求购单',
                     url: 'some 发布求购单 url',
-                    img: '//jbz.pigsales.cn/static/img/ban2_58a3876.png'
+                    img: 'http://jbz.pigsales.cn/static/img/ban2_58a3876.png'
                 },
                 {
                     tit: '生猪市场',
                     url: 'some 生猪市场 url',
-                    img: '//jbz.pigsales.cn/static/img/ban6_9fd0f9a.png'
+                    img: 'http://jbz.pigsales.cn/static/img/ban6_9fd0f9a.png'
                 },
                 {
                     tit: '豪猪好卖',
                     url: 'some 豪猪好卖 url',
-                    img: '//jbz.pigsales.cn/static/img/ban1_0ebdca2.png'
+                    img: 'http://jbz.pigsales.cn/static/img/ban1_0ebdca2.png'
                 }
             ],
             tabList: [
@@ -65,131 +69,27 @@ export default {
                 }
             ],
             curRecomment: 0,
-            distanceGoods: [
-                {
-                    goodsName: '外二元肥猪 这个名字超长，显示应该是怎样的',
-                    averageWeight: '133',
-                    price: 11.6,
-                    unit: '元/kg',
-                    modelCode: 'TRADEMODEL000001',
-                    mapAddress: '四川省德阳市中江县桂竹路',
-                    kilometers: '86',
-                    picUrl:
-                        'http://img.pigkeeping.cn/berkshireapi/201802/6d95d371-f70a-4986-8c37-bd3eee546d47.jpg',
-                    shelvesId: 2832,
-                    priceDesc: '11.60',
-                    endTime: 1519815600000,
-                    salerName: '徐伟',
-                    weightDesc: null,
-                    discussFlag: false,
-                    selfPrice: true,
-                    imageId: 6314,
-                    modelId: 1
-                },
-                {
-                    goodsName: '外三元肥猪',
-                    averageWeight: '120',
-                    price: 11.2,
-                    unit: '元/kg',
-                    modelCode: 'TRADEMODEL000001',
-                    mapAddress: '陕西省咸阳市杨陵区杨扶路',
-                    kilometers: '545',
-                    picUrl: null,
-                    shelvesId: 2835,
-                    priceDesc: '11.20',
-                    endTime: 1519830000000,
-                    salerName: '张常青',
-                    weightDesc: null,
-                    discussFlag: false,
-                    selfPrice: true,
-                    imageId: null,
-                    modelId: 1
-                },
-                {
-                    goodsName: '外三元肥猪',
-                    averageWeight: '120',
-                    price: 11.2,
-                    unit: '元/kg',
-                    modelCode: 'TRADEMODEL000001',
-                    mapAddress: '陕西省咸阳市杨陵区揉谷产业路',
-                    kilometers: '545',
-                    picUrl: null,
-                    shelvesId: 2836,
-                    priceDesc: '11.20',
-                    endTime: 1519830000000,
-                    salerName: '张常青',
-                    weightDesc: null,
-                    discussFlag: false,
-                    selfPrice: true,
-                    imageId: null,
-                    modelId: 1
-                }
-            ],
-            priceGoods: [
-                {
-                    goodsName: '外三元肥猪',
-                    averageWeight: '120',
-                    price: 11.2,
-                    unit: '元/kg',
-                    modelCode: 'TRADEMODEL000001',
-                    mapAddress: '陕西省咸阳市杨陵区杨扶路',
-                    kilometers: '545',
-                    picUrl: null,
-                    shelvesId: 2835,
-                    priceDesc: '11.20',
-                    endTime: 1519830000000,
-                    salerName: '张常青',
-                    weightDesc: null,
-                    discussFlag: false,
-                    selfPrice: true,
-                    imageId: null,
-                    modelId: 1
-                },
-                {
-                    goodsName: '外三元肥猪',
-                    averageWeight: '120',
-                    price: 11.2,
-                    unit: '元/kg',
-                    modelCode: 'TRADEMODEL000001',
-                    mapAddress: '陕西省咸阳市杨陵区揉谷产业路',
-                    kilometers: '545',
-                    picUrl: null,
-                    shelvesId: 2836,
-                    priceDesc: '11.20',
-                    endTime: 1519830000000,
-                    salerName: '张常青',
-                    weightDesc: null,
-                    discussFlag: false,
-                    selfPrice: true,
-                    imageId: null,
-                    modelId: 1
-                },
-                {
-                    goodsName: '外二元肥猪',
-                    averageWeight: '133',
-                    price: 11.6,
-                    unit: '元/kg',
-                    modelCode: 'TRADEMODEL000001',
-                    mapAddress: '四川省德阳市中江县桂竹路',
-                    kilometers: '86',
-                    picUrl:
-                        'http://img.pigkeeping.cn/berkshireapi/201802/6d95d371-f70a-4986-8c37-bd3eee546d47.jpg',
-                    shelvesId: 2832,
-                    priceDesc: '11.60',
-                    endTime: 1519815600000,
-                    salerName: '徐伟',
-                    weightDesc: null,
-                    discussFlag: false,
-                    selfPrice: true,
-                    imageId: 6314,
-                    modelId: 1
-                }
-            ],
+            goodsList:{
+                distanceGoods: {},
+                priceGoods: {},
+            }
         };
+    },
+    computed:{
+        curFinishedGoods() {
+            if (!this.curRecomment) {
+                return this.goodsList.distanceGoods.traded;
+            }
+            return this.goodsList.priceGoods.traded;
+        }
     },
     activated() {
         this.resetHeader();
-        this.distanceGoods = [];
+        // mock data
+        setTimeout(() => {
+            this.goodsList.distanceGoods = distanceGoods;
+            this.goodsList.priceGoods = priceGoods;
+        }, 3000);
     },
     methods: {
         resetHeader() {
