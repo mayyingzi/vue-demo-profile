@@ -31,33 +31,41 @@ const pageNotFoundView = (resolve) => {
 const title = (page) => ({
     title: pageTitle[page]
 });
-
-export default [
-    {
-        path: '/login',
-        name: 'loginView',
-        meta: title('loginView'),
-        // component: view('loginView')
-        component: loginView
-    },
+// 无需访问权限要求页面
+const constanRoutes = [
+    // {
+    //     path: '/login',
+    //     name: 'loginView',
+    //     meta: {
+    //         title: title('loginView')
+    //     },
+    //     // component: view('loginView')
+    //     component: loginView
+    // },
     {
         path: '/',
         name: 'testPage',
-        meta: title('testPage'),
+        meta: {
+            title: title('testPage')
+        },
         // component: view('testPage')
         component: testPageView
     },
     {
         path: '/test-pull',
         name: 'testPull',
-        meta: title('testPull'),
+        meta: {
+            title: title('testPull')
+        },
         // component: view('testPull')
         component: testPullView
     },
     {
         path: '/test-echarts',
         name: 'testEcharts',
-        meta: title('testEcharts'),
+        meta: {
+            title: title('testEcharts')
+        },
         // component: view('testEcharts')
         component: testEchartsView
     },
@@ -72,7 +80,9 @@ export default [
     {
         path: '/zIndex',
         name: 'zIndex',
-        meta: title('zIndex'),
+        meta: {
+            title: title('zIndex')
+        },
         // component: view('zIndex')
         component: zIndexView
     },
@@ -81,8 +91,28 @@ export default [
         // 404 正则匹配(最好写在最后)
         path: '*',
         name: 'pageNotFound',
-        meta: title('pageNotFound'),
+        meta: {
+            title: title('pageNotFound')
+        },
         // component: view('pageNotFound')
         component: pageNotFoundView
     }
 ];
+
+// 按照权限访问
+const asyncRoutes = [
+    {
+        path: '/login',
+        name: 'loginView',
+        meta: {
+            title: title('loginView'),
+            permission:['buyer', 'saller']
+        },
+        // component: view('loginView')
+        component: loginView
+    }
+];
+export {
+    constanRoutes,
+    asyncRoutes
+};

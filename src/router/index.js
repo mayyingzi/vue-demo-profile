@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import routes from './routes';
+import { constanRoutes } from './routes';
 import applyRouterMiddleware from './applyMiddleware';
 
 Vue.use(Router);
 
 const router = new Router({
-    routes
+    routes: constanRoutes
     // mode: 'history'
 });
 
