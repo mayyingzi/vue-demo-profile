@@ -14,7 +14,8 @@
                 <p class="goods-name">{{item.goodsName}}</p>
                 <div class="desc">
                     <span v-if="!isTabItem">成交价</span>
-                    <span class="price">{{item.price?item.price:'议价'}}</span>
+                    <span class="price" v-if="item.price">{{item.price | parseMoney}}</span>
+                    <span class="price" v-else>{{item.priceDesc}}</span>
                     <span class="unit">{{item.unit}}</span>
                     <span class="aweight">(预估均重{{item.averageWeight}}kg)</span>
                 </div>
@@ -31,7 +32,7 @@
         </div>                    
         <div class="posi-main" v-if="isTabItem">
             <p class="posi">{{item.mapAddress}}</p>
-            <p class="far">{{item.kilometers}}km</p>
+            <p class="far">{{item.kilometers | parseMoney}}km</p>
         </div>
         <div class="time-msg" v-else>
             <p class="saller-name">卖家：{{item.salerName}}</p>

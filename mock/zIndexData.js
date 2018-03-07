@@ -83,7 +83,7 @@ const distanceGoods = {
         {
             goodsName: '外二元肥猪',
             averageWeight: '105',
-            price: 15,
+            price: 15123355555,
             unit: '元/kg',
             modelCode: 'TRADEMODEL000001',
             mapAddress: '四川省绵阳市江油市八一乡八一乡新明村',
