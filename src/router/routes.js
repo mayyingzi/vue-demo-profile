@@ -12,6 +12,9 @@ const loginView = (resolve) => {
 const zIndexView = (resolve) => {
     require([`../views/zIndex/index.vue`], resolve); // eslint-disable-line
 };
+const zmapView = (resolve) => {
+    require([`../views/zmap/index.vue`], resolve); // eslint-disable-line
+};
 const testPullView = (resolve) => {
     require([`../views/testPull/index.vue`], resolve); // eslint-disable-line
 };
@@ -85,6 +88,16 @@ const constanRoutes = [
         },
         // component: view('zIndex')
         component: zIndexView
+    },
+
+    {
+        path: '/zmap',
+        name: 'zmapView',
+        meta: {
+            title: title('zmap')
+        },
+        // component: view('zIndex')
+        component: zmapView
     },
     // ------【八戒通】e
     {

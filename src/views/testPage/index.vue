@@ -40,6 +40,8 @@
                 :zoom = "zoom"
                 @ready="handler"
             >
+                 <p style="padding: 0 10px;">以下是使用 `bm-view` 组件渲染的百度地图实例</p>
+                <bm-view class="map-view"></bm-view>
                 <bm-geolocation
                     :showAddreBar=true
                     :autoLocation=true
@@ -48,6 +50,11 @@
                     @locationError="locationError"
                 >
                 </bm-geolocation>
+                <bm-marker
+                    :position="center"
+                    :dragging="false"
+                    animation="BMAP_ANIMATION_DROP"
+                ></bm-marker>
             </baidu-map>
            
         </div>
@@ -65,7 +72,7 @@
 <script lang="babel">
 import { mapActions, mapGetters } from 'vuex';
 import Echarts from 'vue-echarts/components/ECharts';
-import {BaiduMap, BmGeolocation} from 'vue-baidu-map';
+import {BaiduMap, BmGeolocation, BmView, BmMarker} from 'vue-baidu-map';
 import 'echarts/lib/chart/line';
 import 'echarts/lib/component/polar';
 import loading from '../../components/Loading';
@@ -80,7 +87,9 @@ export default {
         alert,
         chart: Echarts,
         BaiduMap,
-        BmGeolocation
+        BmGeolocation,
+        BmView,
+        BmMarker
     },
     data() {
         const data = [];
@@ -92,6 +101,7 @@ export default {
             data.push([r, i]);
         }
         return {
+            testTick:'这是初始值',
             error: {
                 msg: '测试吧',
                 buttons: 2,
@@ -161,12 +171,13 @@ export default {
         ...mapGetters(['toastMsg', 'alertOpts'])
     },
     watch: {
-        center(newVal) {
-            this.Geocoder.getPoint(newVal, (point) => {
-                this.map.centerAndZoom(point, 16);
-                this.center = point;
-            }, '北京市');
-        }
+        // center(newVal) {
+        //     this.Geocoder.getPoint(newVal, (point) => {
+        //         this.center = point;
+        //         // 设置地图中心
+        //         // this.map.getCenter(this.center);
+        //     }, '北京市');
+        // }
     },
     activated() {
         // console.log('组件已激活：此处作为页面的初始化数据更新');
@@ -219,19 +230,28 @@ export default {
             const rand = Math.random(0, 1) * 10;
             this.polar.angleAxis.startAngle = rand * 360;
             this.polar.radiusAxis.min = rand;
+            this.testTick = '修改当前的值哈哈哈啊哈';
+            // nextTick 在下次DOM更新循环结束之后执行延迟回调，在修改数据之后即使使用该方法，获取更新后的DOM
+            this.$nextTick(() => {
+                console.log(this.testTick);
+            });
         },
         handler({BMap, map}) {
             this.map = map;
+            this.BMap = BMap;
+            // 初始化中心点
+            this.map.centerAndZoom(new this.BMap.Point(116.404, 39.915), 16);
             this.Geocoder = new BMap.Geocoder();
-            // this.position.lng = 116.404;
-            // this.position.lat = 39.915;
-            // this.center = '成都市';
-            this.zoom = 15;
+            this.zoom = 16;
             // 获取当前位置
             const curAddr = new BMap.LocalCity();
             curAddr.get((result) => {
                 this.position = result.center;
-                this.center = result.name;
+                this.map.centerAndZoom(
+                    new this.BMap.Point(this.position.lng, this.position.lat), 16);
+                this.center = {
+                    ...this.position
+                };
             });
         },
         // 执行定位成功
@@ -292,5 +312,7 @@ export default {
     padding rem(20)
     .bm-view
         width 100%
-        height rem(300)
+        .map-view
+            height rem(600)
+            flex 1
 </style>

@@ -7,6 +7,7 @@ var baseWebpackConfig = require('./webpack.base.conf');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var purify = require('purifycss-webpack-plugin');
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 // lodash 处理
 var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
@@ -64,6 +65,15 @@ var webpackConfig = merge(baseWebpackConfig, {
         new ExtractTextPlugin({
             filename: utils.assetsPath('css/[name].[contenthash].css')
         }),
+        // remove unused css 
+        // TODDO may no use
+        // new purify({
+        //     basePath: __dirname,
+        //     paths:[
+        //         '../index.html',
+        //         '../src/**/*.vue'
+        //     ]
+        // }),
         // Compress extracted CSS. We are using this plugin so that possible
         // duplicated CSS from different components can be deduped.
         new OptimizeCSSPlugin({
