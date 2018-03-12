@@ -13,7 +13,6 @@ import prepare from './components/app/prepare';
 // import addStateGL from './utils/weGLStateDom';
 
 prepare(Vue);
-
 Vue.config.productionTip = false;
 
 // VuexRouterSync.sync(store, router);

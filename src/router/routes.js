@@ -15,6 +15,9 @@ const zIndexView = (resolve) => {
 const zmapView = (resolve) => {
     require([`../views/zmap/index.vue`], resolve); // eslint-disable-line
 };
+const zpricingListView = (resolve) => {
+    require([`../views/zpricingList/index.vue`], resolve); // eslint-disable-line
+};
 const testPullView = (resolve) => {
     require([`../views/testPull/index.vue`], resolve); // eslint-disable-line
 };
@@ -99,6 +102,15 @@ const constanRoutes = [
         // component: view('zIndex')
         component: zmapView
     },
+    {
+        path: '/zpricing-list',
+        name: 'zpricingListView',
+        meta: {
+            title: title('zpricingList')
+        },
+        // component: view('zpricingList')
+        component: zpricingListView
+    },
     // ------【八戒通】e
     {
         // 404 正则匹配(最好写在最后)
@@ -119,13 +131,10 @@ const asyncRoutes = [
         name: 'loginView',
         meta: {
             title: title('loginView'),
-            permission:['buyer', 'saller']
+            permission: ['buyer', 'saller']
         },
         // component: view('loginView')
         component: loginView
     }
 ];
-export {
-    constanRoutes,
-    asyncRoutes
-};
+export { constanRoutes, asyncRoutes };
