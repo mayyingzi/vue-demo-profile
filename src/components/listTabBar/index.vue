@@ -54,8 +54,59 @@
                         v-else
                         class="detailMain">
                         <div class="mainPar clos">
-                            <div class="lineCell slected">位置</div>
-                            <div class="lineCell">所有店铺</div>
+                            <div 
+                                @click="changePosi(true)"
+                                :class="{'selected': curPosi}"
+                                class="lineCell"><i class="posi-icon"></i>位置</div>
+                            <div
+                                @click="changePosi(false)"                                
+                                :class="{'selected': !curPosi}"
+                                class="lineCell">所有店铺</div>
+                        </div>
+                        <!-- 地址定位信息 -->
+                        <div 
+                            :class="{'selected': curPosi}"
+                            class="firTabDe posiDetail">
+                            <div 
+                                class="firTabDeBox">
+                                <div class="province clos">
+                                    <div 
+                                        @click="changeAddrSub({
+                                            index: -1,
+                                            value: '',
+                                            sub: -1
+                                        })"
+                                        :class="{'selected' : curTabVal[0].selected.addr.provinceInd === -1}"
+                                        class="cellItem"><p>全部区域</p></div>
+                                </div>
+                                <div class="city clos">
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 店铺信息 -->
+                        <div 
+                            :class="{'selected': !curPosi}"
+                            class="firTabDe clos">
+                            <div 
+                                @click="changeShopId({
+                                    key: -1,
+                                    value: '所有店铺'
+                                })"
+                                :class="{'selected' : curTabVal[0].selected.shop.index === -1}"
+                                class="cellItem">所有店铺</div>
+                            <div
+                                v-for="(value, key) in listData.firTab.shopMap"
+                                :key="key"
+                                @click="changeShopId({
+                                    key,
+                                    value
+                                })"
+                                :class="{'selected' : curTabVal[0].selected.shop.index === key}"
+                                class="cellItem">
+                                {{value}}
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

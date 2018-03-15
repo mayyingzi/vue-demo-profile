@@ -1,6 +1,7 @@
 // mock tab bar data
 
-const listBarData = {
+// const listBarData = {
+export default {
     pigTypeMap: {
         1: '外三元',
         2: '外二元',
@@ -805,4 +806,4 @@ const listBarData = {
     ]
 };
 
-export default listBarData;
+// export default listBarData;

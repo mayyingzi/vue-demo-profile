@@ -3,7 +3,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper';
 import goodsEmpty from '../../components/goodsEmpty';
 import itemTemp from './itemTmp.vue';
 // mock
-import {distanceGoods, priceGoods} from '../../../mock/zIndexData';
+import mockData from '../../../mock/zIndexData';
 
 export default {
     name: 'zIndex',
@@ -87,8 +87,8 @@ export default {
         this.resetHeader();
         // mock data
         setTimeout(() => {
-            this.goodsList.distanceGoods = distanceGoods;
-            this.goodsList.priceGoods = priceGoods;
+            this.goodsList.distanceGoods = mockData.distanceGoods;
+            this.goodsList.priceGoods = mockData.priceGoods;
         }, 3000);
     },
     methods: {
