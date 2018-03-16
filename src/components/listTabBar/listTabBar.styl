@@ -81,7 +81,7 @@
                         max-height rem(585)
                         overflow-y scroll
                         &.clos:first-child
-                            width 30%
+                            width 25%
                         .lineCell
                             height rem(90)
                             line-height rem(90)
@@ -101,7 +101,7 @@
                     .firTabDe
                         display none
                         background-color #eee
-                        width 100%
+                        width 75%
                         &.posiDetail
                             background-color #f7f7f7                        
                         &.selected
@@ -111,19 +111,27 @@
                             background-color #F7F7F7
                             .province, .city
                                 flex 1
-                            .province
-                                border-right rem(1) solid #e5e5e5
-                                
                                 .cellItem
-                                    background-color #F7F7F7
                                     padding 0 rem(10)
                                     border none
+                                    height auto
                                     p
                                         border-bottom rem(1) solid #e5e5e5
+                                        height rem(90)
+                                        overflow hidden
+                                        text-overflow ellipsis
+                                        white-space nowrap
+                                        box-sizing border-box
+
+                            .province
+                                border-right rem(1) solid #e5e5e5
+                                .cellItem
+                                    background-color #F7F7F7
                                     &.selected
                                         background-color #fff
                                         &:after
-                                            display none                              
+                                            display none
+                                                      
 
                         
                     .mainCell
@@ -135,6 +143,7 @@
                         padding 0 rem(30)
                         overflow hidden
                         text-overflow ellipsis
+                        white-space nowrap
                         height rem(90)
                         line-height rem(90)
                         position relative
@@ -154,6 +163,8 @@
                                 right rem(12)
                                 top 50%
                                 transform translate(0, -60%) rotate(45deg)
+                    .small-size
+                        font-size rem(24)   
 
             &.actived
                 .tabDetail

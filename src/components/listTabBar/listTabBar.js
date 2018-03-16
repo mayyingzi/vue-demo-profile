@@ -23,9 +23,29 @@ export default {
             },
             title: '所有店铺'
         };
+        const listKil = [50, 100, 150, 200];
         return {
-            cashAddrSub,
-            listKil:[50, 100, 150, 200],
+            cashAddrSub:{
+                key: 'firTab',
+                selected: {
+                    shop: {
+                        index: -1
+                    },
+                    addr: {
+                        provinceInd: -1,
+                        cityInd: -1
+                    }
+                },
+                postVal: {
+                    shopId: '',
+                    provinceName: '',
+                    cityName: '',
+                    kilometers: ''
+                },
+                title: '所有店铺'
+            },
+            listKil,
+            curPosiSub: listKil,
             curTabVal: [
                 {
                     ...cashAddrSub
@@ -58,7 +78,7 @@ export default {
             const result = {
                 firTab: {
                     shopMap: null,
-                    address: null
+                    address: []
                 }
             };
             if (this.listBarData) {
@@ -77,14 +97,27 @@ export default {
                 _.extend(result, _.omit(_result, omitKey));
             }
             return result;
+        },
+        curCityList() {
+            let result = [];
+            if (this.cashAddrSub.selected.addr.provinceInd > -1) {
+                const _index = this.cashAddrSub.selected.addr.provinceInd;
+                const curProv = this.listData.firTab.address[_index];
+                result = JSON.parse(JSON.stringify(curProv));
+                const topProv = {
+                    name: curProv.name,
+                    sub: true
+                };
+                result.sub.unshift(topProv);
+            }
+            return result.sub;
         }
     },
     watch: {
         curTabVal: {
             deep: true,
-            handler(newVal) {
-                console.log('重新更新接口');
-                console.log(newVal);
+            handler() {
+                this.refresh();
             }
         }
     },
@@ -95,9 +128,14 @@ export default {
                 return;
             }
             this.actTab = actTabIndx;
+            _.extend(this.cashAddrSub, JSON.parse(JSON.stringify(this.curTabVal[0])));
         },
         selectTabCell(config) {
-            const { title, cur, tabIndex } = config;
+            const {
+                title,
+                cur,
+                tabIndex
+            } = config;
             if (this.curTabVal[tabIndex].cur === cur) {
                 this.toggleDetail(-1);
                 return;
@@ -127,22 +165,42 @@ export default {
             this.toggleDetail(-1);
         },
         changeAddrSub(addrPItem) {
-            console.log('修改地址信息');
-            console.log(addrPItem);
-            // const result = {
-            //     key: 'firTab',
-            //     selected: {
-            //         addr: {
-            //             provinceInd: addrPItem.index,
-            //             cityInd: -1
-            //         }
-            //     },
-            //     postVal: {
-            //         provinceName: addrPItem.index > 0 ? addrPItem.value : '',
-            //         cityName: ''
-            //     },
-            //     title: '所有店铺'
-            // };
+            const result = this.cashAddrSub;
+            if (addrPItem.index === result.selected.addr.provinceInd) {
+                return;
+            }
+            result.selected.addr.provinceInd = addrPItem.index;
+            result.selected.addr.cityInd = '';
+            result.postVal.kilometers = '';
+            result.postVal.provinceName = addrPItem.value;
+            result.postVal.cityName = '';
+            _.extend(this.cashAddrSub, result);
+        },
+        subChangeSure(config) {
+            const result = this.cashAddrSub;
+            if (config.subInd !== result.selected.addr.cityInd) {
+                result.title = config.title;
+                if (config.type === 'long') {
+                    result.selected.addr.cityInd = config.subInd > -1 ? `long${config.subInd}` : config.subInd;
+                    result.postVal.cityName = '';
+                    result.postVal.kilometers = config.subValue;
+                }
+                if (config.type === 'city') {
+                    result.postVal.cityName = config.subInd > 0 ? config.subValue : '';
+                    result.selected.addr.cityInd = config.subInd;
+                }
+                _.extend(this.cashAddrSub, result);
+                _.extend(this.curTabVal[0], JSON.parse(JSON.stringify(result)));
+            }
+            this.toggleDetail(-1);
+        },
+        refresh() {
+            console.log(this.curTabVal);
+            const postData = {};
+            _.each(this.curTabVal, (tabItem) => {
+                _.extend(postData, tabItem.postVal);
+            });
+            console.log(postData);
         }
     }
 };

@@ -69,18 +69,63 @@
                             class="firTabDe posiDetail">
                             <div 
                                 class="firTabDeBox">
+
                                 <div class="province clos">
                                     <div 
                                         @click="changeAddrSub({
                                             index: -1,
                                             value: '',
-                                            sub: -1
                                         })"
-                                        :class="{'selected' : curTabVal[0].selected.addr.provinceInd === -1}"
+                                        :class="{'selected' : cashAddrSub.selected.addr.provinceInd === -1}"
                                         class="cellItem"><p>全部区域</p></div>
+                                     <div 
+                                        @click="changeAddrSub({
+                                            index: provIndex,
+                                            value: province.name,
+                                        })"
+                                        v-for="(province, provIndex) in listData.firTab.address"
+                                        :key="provIndex"
+                                        :class="{'selected' : cashAddrSub.selected.addr.provinceInd === provIndex}"
+                                        class="cellItem"><p>{{province.name}}<span class="small-size">（已开通省）</span></p></div>
                                 </div>
-                                <div class="city clos">
 
+                                <div class="city clos">
+                                    <div 
+                                        v-if="cashAddrSub.selected.addr.provinceInd === -1"
+                                        :class="{'selected' : cashAddrSub.selected.addr.provinceInd === -1 && cashAddrSub.selected.addr.cityInd === -1}"
+                                        @click="subChangeSure({
+                                            title: '全部区域',
+                                            subValue: null,
+                                            subInd:-1,
+                                            type: 'long'
+                                        })"
+                                        class="cellItem"><p>全部区域</p></div>
+                                    <div                                        
+                                        v-for="(subVal, subInd) in curPosiSub"
+                                        :key="subInd"
+                                        :class="{'selected' : cashAddrSub.selected.addr.cityInd === 'long'+subInd}"
+                                        v-if="cashAddrSub.selected.addr.provinceInd === -1"
+                                        @click="subChangeSure({
+                                            title: subVal+'公里',
+                                            subValue: subVal,
+                                            subInd,
+                                            type: 'long'
+                                        })"
+                                        class="cellItem">
+                                            <p>{{subVal}}公里<span v-if="subInd<2" class="small-size">（附近）</span></p>
+                                    </div>
+                                    <div 
+                                        v-if="cashAddrSub.selected.addr.provinceInd !== -1"
+                                        :class="{'selected' : cashAddrSub.selected.addr.cityInd === cityInd}"
+                                        v-for="(subVal, cityInd) in curCityList"
+                                        :key="cityInd"
+                                        @click="subChangeSure({
+                                            title: subVal.name,
+                                            subValue: subVal.name,
+                                            subInd:cityInd,
+                                            type: 'city'
+                                        })"
+                                        class="cellItem"><p>{{subVal.name}}</p></div>
                                 </div>
                             </div>
                         </div>
@@ -96,6 +141,7 @@
                                 :class="{'selected' : curTabVal[0].selected.shop.index === -1}"
                                 class="cellItem">所有店铺</div>
                             <div
+                                v-show="!curPosi"
                                 v-for="(value, key) in listData.firTab.shopMap"
                                 :key="key"
                                 @click="changeShopId({
