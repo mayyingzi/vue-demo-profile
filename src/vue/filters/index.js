@@ -5,7 +5,7 @@
  * @param {string} padStr 部位占用字符
  * @returns {string}
  */
-const leftpad = (paresStr, needLen, padStr) => {
+export const leftpad = (paresStr, needLen, padStr) => {
     let _parseStr = String(paresStr);
     let _index = -1;
     if (!padStr && padStr !== 0) {

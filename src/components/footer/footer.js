@@ -1,46 +1,68 @@
-// TODO设置设置footer的显示与否，当前选中icon更新
-
-let countFlag = 0;
-
 export default {
     name: 'VueFooter',
     data() {
         return {
-            // 当前选中tab ，/：商品； cart: 求购； order： 订单； center：我的
-            nowItem: '',
-            isShow: false
+            // isShow: true,
+            nowItem: '/zIndex',
+            nowTab: 'buyer',
+            footerConfig: {
+                buyerTab: [
+                    {
+                        path: '/zIndex',
+                        tit: '商品',
+                        icon: 'goods'
+                    },
+                    {
+                        path: '/order',
+                        tit: '订单',
+                        icon: 'goods'
+                    },
+                    {
+                        path: '/center',
+                        tit: '我的',
+                        icon: 'center'
+                    }
+                ],
+                sellerTab: [
+                    {
+                        path: '/sellerZindex',
+                        tit: '商品',
+                        icon: 'goods'
+                    },
+                    {
+                        path: '/cart',
+                        tit: '求购',
+                        icon: 'cart'
+                    },
+                    {
+                        path: '/sellerOrder',
+                        tit: '订单',
+                        icon: 'goods'
+                    },
+                    {
+                        path: '/shopIndex',
+                        tit: '店铺',
+                        icon: 'shop'
+                    }
+                ]
+            }
         };
     },
     computed: {
         curRoterP() {
             return this.$route.path;
-        }
-    },
-    created() {
-        this.updateNowItem();
-    },
-    watch: {
-        curRoterP() {
-            this.updateNowItem();
-        }
-    },
-    methods: {
-        updateNowItem() {
-            const RegPath = /^(\/zIndex|\/order|\/cart|\/center)$/;
-            const initItem = this.curRoterP;
-            if (RegPath.test(initItem)) {
-                this.isShow = true;
-                this.nowItem = initItem;
-            } else {
-                this.isShow = false;
-            }
         },
+        isShow() {
+            return !!this.nowTab;
+        }
+    },
+    created() {},
+    methods: {
         goPath(config) {
             // this.nowItem = config.item;
-            if (this.curRoterP === config.path && !countFlag) {
+            if (this.curRoterP === config.path) {
                 return;
             }
-            countFlag++;
             this.$router.replace(config.path);
         }
     }
