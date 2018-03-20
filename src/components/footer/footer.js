@@ -2,9 +2,6 @@ export default {
     name: 'VueFooter',
     data() {
         return {
-            // isShow: true,
-            nowItem: '/zIndex',
-            nowTab: 'buyer',
             footerConfig: {
                 buyerTab: [
                     {
@@ -48,6 +45,7 @@ export default {
             }
         };
     },
+    props:['nowTab', 'nowItem'],
     computed: {
         curRoterP() {
             return this.$route.path;

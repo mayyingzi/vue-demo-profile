@@ -22,13 +22,16 @@
                 <navigation>
                     <router-view 
                         v-on:setHeader="setHeader"
+                        v-on:setFooter="setFooter"
                         class="contentMain"></router-view>
                 </navigation>
             </transition>
         </div>
 
         <!-- footer -->
-        <vue-footer></vue-footer>
+        <vue-footer 
+            :now-item="nowItem"
+            :now-tab="nowTab"></vue-footer>
     </div>
 </template>
 
@@ -70,7 +73,9 @@
                 headerLeftBtn: herderLeftInit,
                 headerRightBtn: null,
                 headerClass: '',
-                isNavHide: null
+                isNavHide: null,
+                nowItem: '',
+                nowTab: ''
             };
         },
         computed: {},
@@ -101,6 +106,10 @@
                 _.extend(this, {
                     ...initNav
                 }, config);
+            },
+            setFooter(ftConfig) {
+                this.nowItem = ftConfig.nowItem || '';
+                this.nowTab = ftConfig.nowTab || false;
             },
             routeFadeIn() {
                 // console.log('打开新的页面');

@@ -85,6 +85,7 @@ export default {
     },
     activated() {
         this.resetHeader();
+        this.resetFooter();
         // mock data
         setTimeout(() => {
             this.goodsList.distanceGoods = mockData.distanceGoods;
@@ -95,6 +96,12 @@ export default {
         resetHeader() {
             this.$emit('setHeader', {
                 isNavHide: true
+            });
+        },
+        resetFooter() {
+            this.$emit('setFooter', {
+                nowTab: 'buyer',
+                nowItem: '/zIndex'
             });
         },
         clickAd(url) {

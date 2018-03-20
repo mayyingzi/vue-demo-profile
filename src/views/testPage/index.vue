@@ -182,6 +182,7 @@ export default {
     activated() {
         // console.log('组件已激活：此处作为页面的初始化数据更新');
         this.resetHeader();
+        this.resetFooter();
     },
     mounted() {
         console.log('创建成功');
@@ -193,6 +194,12 @@ export default {
             this.$emit('setHeader', {
                 title: '测试页面显示标题',
                 headerLeftBtn: null
+            });
+        },
+        resetFooter() {
+            this.$emit('setFooter', {
+                nowTab: 'buyer',
+                nowItem: '/zIndex'
             });
         },
         cshowAlert() {
