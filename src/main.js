@@ -11,6 +11,16 @@ import store from './store';
 import ajax from './http/ajax';
 import prepare from './components/app/prepare';
 // import addStateGL from './utils/weGLStateDom';
+// add console
+import loadScript from './utils/loadScript';
+
+loadScript(
+    '//res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/3.0.0/vconsole.min.js',
+    () => {
+        // eslint-disable-next-line
+        new VConsole();
+    }
+);
 
 prepare(Vue);
 Vue.config.productionTip = false;
