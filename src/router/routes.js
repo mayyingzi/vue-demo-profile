@@ -34,9 +34,7 @@ const pageNotFoundView = (resolve) => {
     require([`../views/pageNotFound/index.vue`], resolve); // eslint-disable-line
 };
 
-const title = (page) => ({
-    title: pageTitle[page]
-});
+const title = (page) => (pageTitle[page]);
 // 无需访问权限要求页面
 const constanRoutes = [
     // {
@@ -78,7 +76,9 @@ const constanRoutes = [
     {
         path: '/vue-code',
         name: 'vueCode',
-        meta: title('vueCode'),
+        meta: {
+            title: title('vueCode')
+        },
         // component: view('vueCode')
         component: vueCodeView
     },
@@ -112,16 +112,16 @@ const constanRoutes = [
         component: zpricingListView
     },
     // ------【八戒通】e
-    {
-        // 404 正则匹配(最好写在最后)
-        path: '*',
-        name: 'pageNotFound',
-        meta: {
-            title: title('pageNotFound')
-        },
-        // component: view('pageNotFound')
-        component: pageNotFoundView
-    }
+    // {
+    //     // 404 正则匹配(最好写在最后)
+    //     path: '*',
+    //     name: 'pageNotFound',
+    //     meta: {
+    //         title: title('pageNotFound')
+    //     },
+    //     // component: view('pageNotFound')
+    //     component: pageNotFoundView
+    // }
 ];
 
 // 按照权限访问
@@ -135,6 +135,16 @@ const asyncRoutes = [
         },
         // component: view('loginView')
         component: loginView
+    },
+    {
+        // 404 正则匹配(最好写在最后)
+        path: '*',
+        name: 'pageNotFound',
+        meta: {
+            title: title('pageNotFound')
+        },
+        // component: view('pageNotFound')
+        component: pageNotFoundView
     }
 ];
 export { constanRoutes, asyncRoutes };

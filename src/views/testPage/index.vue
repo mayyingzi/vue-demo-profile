@@ -1,6 +1,9 @@
 <template lang="html">
     <div class="testPage">
         <div class="test-go-derict">
+            <p class="go-item" @click="goCopy('这是zxy控制的copy')" >点击按钮 copy</p>
+        </div>
+        <div class="test-go-derict">
             <p class="go-item" @click="goDirect('/login')" >跳转登录页面</p>
         </div>
         <!-- 无限滚动测试 -->
@@ -71,6 +74,8 @@
 
 <script lang="babel">
 import { mapActions, mapGetters } from 'vuex';
+// 测试js copy to clipborder
+import copy from 'copy-to-clipboard';
 import Echarts from 'vue-echarts/components/ECharts';
 import {BaiduMap, BmGeolocation, BmView, BmMarker} from 'vue-baidu-map';
 import 'echarts/lib/chart/line';
@@ -268,6 +273,14 @@ export default {
         },
         locationError(status) {
             console.log(status);
+        },
+        goCopy(txt) {
+            const isOk = copy(`${txt}: ${window.location.href}`);
+            if (isOk) {
+                this.toast('copy success!');
+            } else {
+                this.toast('copy fail!');
+            }
         }
     }
 };
