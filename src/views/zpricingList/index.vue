@@ -4,7 +4,9 @@
         <list-tab-bar
             :listBarData="listBarData"
         ></list-tab-bar>
-        <div class="">
+        <!-- main -->
+        <div class="main-list">
+            <!-- countTime -->
             list data detail
             <p>测试倒计时</p>
             <count-down 
@@ -20,7 +22,17 @@
                 :hourTxt="'小时'" 
                 :minutesTxt="'分钟'" 
                 :secondsTxt="'秒'"></count-down>
+
+                <!-- listItme -->
+                
+                <item-temp
+                    v-for ="(item, ind) in listPricing"
+                    :item = "item"
+                    :key ="ind"
+                ></item-temp>
         </div>
+
+
     </div>
 </template>
 

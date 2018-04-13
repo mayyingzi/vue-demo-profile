@@ -109,6 +109,7 @@ export default {
         },
         clickTab(module) {
             console.log(`跳转到tab对应的模块：${module}`);
+            this.$router.push({path: 'zpricing-list'});
         },
         clickRecommend(index) {
             if (index === this.curRecomment) {
