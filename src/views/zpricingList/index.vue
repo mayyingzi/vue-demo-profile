@@ -6,33 +6,13 @@
         ></list-tab-bar>
         <!-- main -->
         <div class="main-list">
-            <!-- countTime -->
-            list data detail
-            <p>测试倒计时</p>
-            <count-down 
-                v-on:start_callback="countDownS_cb(1)" 
-                v-on:end_callback="countDownE_cb(1)" 
-                :currentTime="1481450106" 
-                :startTime="1481450110" 
-                :endTime="1481450116" 
-                :tipText="'距离开始文字'" 
-                :tipTextEnd="'距离结束文字'" 
-                :endText="'活动结束'" 
-                :dayTxt="'天'" 
-                :hourTxt="'小时'" 
-                :minutesTxt="'分钟'" 
-                :secondsTxt="'秒'"></count-down>
-
-                <!-- listItme -->
-                
-                <item-temp
-                    v-for ="(item, ind) in listPricing"
-                    :item = "item"
-                    :key ="ind"
-                ></item-temp>
+            <!-- listItme -->
+            <item-temp
+                v-for ="(item, ind) in listPricing"
+                :item = "item"
+                :key ="ind"
+            ></item-temp>
         </div>
-
-
     </div>
 </template>
 

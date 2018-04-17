@@ -1,10 +1,10 @@
 <template>
     <div class="countDown">
         <p v-if="msTime.show">
-            <span v-if="tipShow">{{tipText}}:</span>
-            <span v-if="!tipShow">{{tipTextEnd}}:</span>
+            <span v-if="tipShow && showTxt">{{tipText}}:</span>
+            <span v-if="!tipShow && showTxt">{{tipTextEnd}}:</span>
             <span 
-                v-if="msTime.day>0"><span>{{msTime.day}}</span><i>{{dayTxt}}</i></span>
+                v-if="msTime.day>0 && !noDay"><span>{{msTime.day}}</span><i>{{dayTxt}}</i></span>
             <span>{{msTime.hour}}</span><i>{{hourTxt}}</i>
             <span>{{msTime.minutes}}</span><i>{{minutesTxt}}</i>
             <span>{{msTime.seconds}}</span><i>{{secondsTxt}}</i>            
@@ -48,7 +48,7 @@ export default {
             perTimeUnit: 1000,
             // 允许最大误差
             limitNum: 1010,
-            cashPreTime: 0,
+            cashPreTime: 0
         };
     },
     watch: {
@@ -111,6 +111,16 @@ export default {
         },
         // 是否开启秒表倒计时， 未完成
         secondsFixed: {
+            type: Boolean,
+            default: false
+        },
+        // 是否显示文案
+        showTxt: {
+            type: Boolean,
+            default: false
+        },
+        // 是否显示天
+        noDay: {
             type: Boolean,
             default: false
         }
@@ -186,6 +196,12 @@ export default {
                 // 是否开启秒表倒计时 ，未完成
                 msTime.seconds = Math.floor(timeDistance / 1000).toFixed(0);
                 timeDistance -= msTime.seconds * 1000;
+
+                // 不显示天，需要将时间添加到hour
+                msTime.hour = this.noDay
+                    ? msTime.hour + (msTime.day * 24)
+                    : msTime.hour;
+
                 msTime.hour =
                     msTime.hour < 10
                         ? leftpad(msTime.hour, 2, '0')

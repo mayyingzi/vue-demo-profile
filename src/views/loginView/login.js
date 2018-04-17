@@ -15,6 +15,8 @@ const headerRightBtn = {
 
 export default {
     name: 'loginView',
+    // TODO: test todo
+    // FIXME: 已经修复
     components: {
         // alert: require('@/components/Alert')
         alert
@@ -70,7 +72,7 @@ export default {
         restHeader() {
             this.$emit('setHeader', {
                 title: '请登录',
-                headerRightBtn: headerRightBtn
+                headerRightBtn
             });
             eventBus.$on(HEADER_RIGHT_CLICK, (param) => {
                 console.log(param);
@@ -98,6 +100,17 @@ export default {
             const res = await Vue.$ajax.post('testPostMethod', {
                 id: '测试post'
             });
+        },
+
+        async getGoodsList() {
+            const res = await Vue.$ajax.get('goodsList', {
+                page: 1,
+                modelCode: 'TRADEMODEL000001',
+                lng: '104.06792346',
+                lat: '30.67994285',
+                _: '1523840857972'
+            });
+            console.log(res);
         },
 
         async testClickA() {

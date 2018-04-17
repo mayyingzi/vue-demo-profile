@@ -38,8 +38,13 @@ export const isValidDate = (date) => {
 
     return true;
 };
-
-export const isValidTimes = (time) => {
+/**
+ * 是否为时间格式
+ *
+ * @param {string} time
+ * @returns {boolean}
+ */
+const isValidTimes = (time) => {
     const currentTime = new Date().getTime();
 
     if (time > currentTime) {
