@@ -2,6 +2,7 @@
     <div class="pricingList">
         <!-- tab bar -->
         <list-tab-bar
+            class="inFixed"
             :listBarData="listBarData"
         ></list-tab-bar>
         <!-- main -->

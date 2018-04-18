@@ -25,6 +25,7 @@
         "lodash": "^4.17.4",
         "superagent": "^3.5.2",
         "vue": "^2.5.13",
+        "vue-amap": "^0.5.4",
         "vue-awesome-swiper": "^3.1.2",
         "vue-baidu-map": "^0.20.7",
         "vue-echarts": "^3.0.1",

@@ -45,7 +45,14 @@
                     :secondsTxt="''"></count-down>
             </div>
             
-            <div class="msg-rt"></div>
+            <div class="msg-rt">
+                <div
+                    v-if="item.status=='IN_TRADING' && item.canOrder && item.surplusNumber > 0"
+                     class="btn orange">立即抢猪</div>
+                <div 
+                    v-else
+                    class="btn disabled">{{item.status=="BEFORE_AUCTION" ? "未开拍" :(item.status=="COMPLETE"?(item.surplusNumber==0?"已抢完":"已结束"):(item.surplusNumber==0?"已抢完":"立即抢购"))}}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -164,6 +171,22 @@ export default {
         color #FA4848
         height rem(56)
         line-height rem(56)
+    .msg-rt
+        .btn
+            height rem(52)
+            width rem(242)
+            display block
+            text-align center
+            box-sizing border-box
+            border-radius rem(10)
+            line-height rem(52)
+            font-size rem(26)
+            color #fff
+            &.disabled
+                background-color #ccc
+            &.orange
+                background-image: linear-gradient(90deg,#FF9000 0,#FF5000 98%);
+                
 </style>
 
 <style lang="stylus">

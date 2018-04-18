@@ -8,7 +8,7 @@ export default {
         shelvesGoodsList: [
             {
                 shelvesId: 3935,
-                goodsName: '外三元肥猪',
+                goodsName: '外三元肥猪-12',
                 saledNumber: 300,
                 count: 300,
                 surplusNumber: 0,
