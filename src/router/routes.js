@@ -18,6 +18,7 @@ const zmapView = (resolve) => {
 const zpricingListView = (resolve) => {
     require([`../views/zpricingList/index.vue`], resolve); // eslint-disable-line
 };
+
 const testPullView = (resolve) => {
     require([`../views/testPull/index.vue`], resolve); // eslint-disable-line
 };
@@ -34,7 +35,7 @@ const pageNotFoundView = (resolve) => {
     require([`../views/pageNotFound/index.vue`], resolve); // eslint-disable-line
 };
 
-const title = (page) => (pageTitle[page]);
+const title = (page) => pageTitle[page];
 // 无需访问权限要求页面
 const constanRoutes = [
     // {
@@ -110,7 +111,7 @@ const constanRoutes = [
         },
         // component: view('zpricingList')
         component: zpricingListView
-    },
+    }
     // ------【八戒通】e
     // {
     //     // 404 正则匹配(最好写在最后)

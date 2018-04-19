@@ -17,7 +17,7 @@ export default {
                 endTime: 1523959200000,
                 deliveryDate: 1523980800000,
                 mapAddress: '山东省德州市陵城区S353',
-                countDownTime: 4509875,
+                countDownTime: 9875,
                 shopId: 21,
                 shopName: '临邑肥猪销售店',
                 shopType: 'ENTERPRISE',

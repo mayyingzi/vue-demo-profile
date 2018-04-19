@@ -28,6 +28,7 @@
                     <count-down class="count-box"
                         :startTime="new Date().getTime()" 
                         :endTime="new Date().getTime() + item.countDownTime" 
+                        @end_callback = "endCountTimeFn"
                         :noDay = true                        
                         :hourTxt="'：'" 
                         :minutesTxt="'：'" 
@@ -39,9 +40,10 @@
                 <count-down class="count-box"
                     :startTime="new Date().getTime()" 
                     :endTime="new Date().getTime() + item.countDownTime"
+                    @end_callback = "endCountTimeFn"
                     :noDay = true
-                    :hourTxt="'：'" 
-                    :minutesTxt="'：'" 
+                    :hourTxt="':'" 
+                    :minutesTxt="':'" 
                     :secondsTxt="''"></count-down>
             </div>
             
@@ -69,6 +71,9 @@ export default {
     methods: {
         goDetial(config) {
             console.log(`点击进入详情${config}`);
+        },
+        endCountTimeFn() {
+            // console.log('倒计时结束');
         }
     }
 };

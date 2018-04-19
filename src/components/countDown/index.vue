@@ -1,6 +1,6 @@
 <template>
     <div class="countDown">
-        <p v-if="msTime.show">
+        <p v-if="msTime.show || !isShowEndText">
             <span v-if="tipShow && showTxt">{{tipText}}:</span>
             <span v-if="!tipShow && showTxt">{{tipTextEnd}}:</span>
             <span 
@@ -9,7 +9,7 @@
             <span>{{msTime.minutes}}</span><i>{{minutesTxt}}</i>
             <span>{{msTime.seconds}}</span><i>{{secondsTxt}}</i>            
         </p>
-        <p v-if="!msTime.show">{{endText}}</p>
+        <p v-else>{{endText}}</p>
     </div>
 </template>
 
@@ -54,6 +54,9 @@ export default {
     watch: {
         currentTime() {
             this.refreshTime();
+        },
+        startTime() {
+            this.refreshTime();
         }
     },
     props: {
@@ -88,6 +91,11 @@ export default {
         endText: {
             type: String,
             default: '已结束'
+        },
+        // 是否显示结束倒计时文案
+        isShowEndText: {
+            type: Boolean,
+            default: false,
         },
         // 自定义显示文字：天
         dayTxt: {
