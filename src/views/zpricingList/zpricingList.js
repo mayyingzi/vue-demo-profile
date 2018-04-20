@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import _ from 'lodash';
+import MeScroll from 'vue-mescroll/mescroll.vue';
 import { lazyAMapApiLoaderInstance } from 'vue-amap';
 import listTabBar from '../../components/listTabBar';
 import countDown from '../../components/countDown';
@@ -7,35 +8,41 @@ import itemTemp from './itemTmp';
 import { setPosiAddr, getPosiAddr } from '../../utils/storage';
 // mock data
 import listBarData from '../../../mock/listTabBar';
-import listPricing from '../../../mock/listPricing';
+import { setTimeout } from 'timers';
+// import listPricing from '../../../mock/listPricing';
 
 export default {
     name: 'zpricingListView',
     components: {
         listTabBar,
         countDown,
-        itemTemp
+        itemTemp,
+        MeScroll
     },
     data() {
         return {
             listBarData: null,
             listPricing: [],
-            amapAddr: {}
+            amapAddr: {},
+            imescroll: null,
+            canScro: true
         };
     },
     computed: {},
+    mounted() {
+        this.imescroll = this.$refs.imescroll.instance;
+    },
     activated() {
         this.resetPage();
         // mock data
         this.listBarData = listBarData;
         // this.listPricing = listPricing.data.shelvesGoodsList;
-        this.fetchGoodsList();
         this.getPosition();
     },
     watch: {
         amapAddr: {
             handler() {
-                // this.fetchGoodsList();
+                this.imescroll.triggerDownScroll();
             },
             deep: true
         }
@@ -50,21 +57,32 @@ export default {
                 nowTab: false
             });
         },
-        async fetchGoodsList() {
+        async fetchGoodsList(isRefresh, page) {
             const params = {
                 page: 1,
                 modelCode: 'TRADEMODEL000001',
                 lng: 104.06792346,
                 lat: 30.67994285
             };
-            console.log(this.amapAddr);
             if (this.amapAddr && this.amapAddr.position) {
                 params.lng = this.amapAddr.position.lng;
                 params.lat = this.amapAddr.position.lat;
             }
-            const res = await Vue.$ajax.get('goodsList', { ...params });
-            this.listPricing = res.shelvesGoodsList;
-            console.log(res);
+            if (page) {
+                params.page = page.num;
+            }
+            const res = await Vue.$ajax.get('goodsList', {
+                ...params
+            });
+            if (isRefresh) {
+                this.listPricing = res.shelvesGoodsList;
+                this.imescroll.endSuccess();
+            } else {
+                const nowDate = this.listPricing;
+
+                this.listPricing = nowDate.concat(res.shelvesGoodsList);
+                this.imescroll.endSuccess(res.shelvesGoodsList.length, true);
+            }
         },
         getPosition() {
             const cashAddr = getPosiAddr();
@@ -94,6 +112,21 @@ export default {
                 console.log(cashAddr);
                 this.amapAddr = cashAddr;
             }
+        },
+        allScrollBack() {
+            console.log(
+                '统一回调（配置 opt-up 时，为上拉回调，下拉失效;配置 opt-down 时，为下拉回调，上拉失效;均不配置不生效）'
+            );
+        },
+        upCallBack(page) {
+            console.log('上滑加载更多');
+            console.log(page);
+            this.fetchGoodsList(false, page);
+        },
+        downCallBack() {
+            console.log('刷新');
+            // mescroll.resetUpScroll();
+            this.fetchGoodsList(true);
         }
     }
 };

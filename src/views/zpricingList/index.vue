@@ -1,5 +1,5 @@
 <template>
-    <div class="pricingList">
+    <div class="pricingList" id ="imescroll">
         <!-- tab bar -->
         <list-tab-bar
             class="inFixed"
@@ -7,13 +7,32 @@
         ></list-tab-bar>
         <!-- main -->
         <div class="main-list">
-            <!-- listItme -->
-            <item-temp
-                v-for ="(item, ind) in listPricing"
-                :item = "item"
-                :key ="ind"
-            ></item-temp>
+            <me-scroll
+                ref="imescroll"
+                :id="'imescroll'"
+                :opt-up="{
+                    isBounce: false,
+                    page: {
+                        num: 1,
+                        size: 10
+                    }
+                }"
+                :opt-down="{
+                    auto: false
+                }"
+                :callback="allScrollBack"
+                :up-callback="upCallBack"
+                :down-callback="downCallBack"
+                >
+                <!-- listItme -->
+                <item-temp
+                    v-for ="(item, ind) in listPricing"
+                    :item = "item"
+                    :key ="ind"
+                ></item-temp>
+            </me-scroll>
         </div>
+
     </div>
 </template>
 
