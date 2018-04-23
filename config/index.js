@@ -36,7 +36,7 @@ module.exports = {
         assetsPublicPath: '/',
         proxyTable: {
             '/v2' :{
-                target: 'http://bjt.pigsales.cn/api/v2',
+                target: 'http://jbz.breeds.com.cn/api/v2',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/v2': '/'

@@ -5,6 +5,8 @@ import { lazyAMapApiLoaderInstance } from 'vue-amap';
 import listTabBar from '../../components/listTabBar';
 import countDown from '../../components/countDown';
 import itemTemp from './itemTmp';
+import goodsEmpty from '../../components/goodsEmpty';
+
 import { setPosiAddr, getPosiAddr } from '../../utils/storage';
 // mock data
 import listBarData from '../../../mock/listTabBar';
@@ -17,7 +19,8 @@ export default {
         listTabBar,
         countDown,
         itemTemp,
-        MeScroll
+        MeScroll,
+        goodsEmpty
     },
     data() {
         return {
@@ -25,7 +28,8 @@ export default {
             listPricing: [],
             amapAddr: {},
             imescroll: null,
-            canScro: true
+            canScro: true,
+            isFirstRe: true
         };
     },
     computed: {},
@@ -74,14 +78,19 @@ export default {
             const res = await Vue.$ajax.get('goodsList', {
                 ...params
             });
+
             if (isRefresh) {
                 this.listPricing = res.shelvesGoodsList;
                 this.imescroll.endSuccess();
             } else {
+                // 如果当前页面page = 1， 表明为刷新，去除老数据
+                if (page.num === 1) {
+                    this.listPricing = [];
+                }
                 const nowDate = this.listPricing;
-
+                res.shelvesGoodsList = res.shelvesGoodsList || [];
                 this.listPricing = nowDate.concat(res.shelvesGoodsList);
-                this.imescroll.endSuccess(res.shelvesGoodsList.length, true);
+                this.imescroll.endByPage(res.shelvesGoodsList.length, res.totalPage);
             }
         },
         getPosition() {
@@ -123,10 +132,16 @@ export default {
             console.log(page);
             this.fetchGoodsList(false, page);
         },
-        downCallBack() {
+        downCallBack(mescroll) {
+            mescroll.resetUpScroll();
+
+            // if (!this.isFirstRe) {
+            //     mescroll.resetUpScroll();
+            // } else {
+            //     this.fetchGoodsList(true);
+            //     this.isFirstRe = false;
+            // }
             console.log('刷新');
-            // mescroll.resetUpScroll();
-            this.fetchGoodsList(true);
         }
     }
 };

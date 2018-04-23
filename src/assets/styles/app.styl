@@ -133,24 +133,16 @@ body
         transform rotate(0deg)
     to
         transform rotate(360deg)
+
 // refresh style
-.top-load-wrapper,.bottom-load-wrapper
-    line-height 90px
-    text-align center
+ .main-box .mescroll-downwarp .downwarp-progress, 
+ .main-box .mescroll-upwarp .upwarp-progress
+    width rem(32)
+    height rem(32)
+    margin-right rem(16)
+    border-radius 100%
+
+ .main-box .mescroll-downwarp .downwarp-tip, 
+ .main-box .mescroll-upwarp .upwarp-tip,
+ .main-box .mescroll-upwarp .upwarp-nodata
     font-size rem(24)
-    color #ff4d6a
-    .icon
-        width rem(30)
-        height rem(30)
-        vertical-align -0.15em
-        fill #ff4d6a
-        overflow hidden
-    .icon-arrow
-        transition .2s
-        transform rotate(180deg)
-    .icon-loading
-        transform rotate(deg)
-        animation-name loading 
-        animation-duration 3s
-        animation-iteration-count infinite
-        animation-direction alternate
